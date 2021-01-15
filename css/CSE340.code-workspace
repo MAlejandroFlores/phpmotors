@@ -1,0 +1,16 @@
+{
+    "folders": [
+		{
+			"path": "../../../../../../../../../Documents/malejandroflores.github.io"
+		},
+		{
+			"path": "../../../../../../../../../Documents/BYUi"
+		},
+		{
+			"path": "../.."
+		}
+	],
+    "settings": {
+        "liveServer.settings.multiRootWorkspaceName": "BYUi"
+    }
+}
