@@ -35,7 +35,8 @@ h2 {
 p,
 li,
 table,
-button {
+button,
+a {
     font-family: 'East Sea Dokdo', cursive;
     font-size: 100%;
 }
@@ -48,9 +49,18 @@ button {
 
 /*Header*/
 
+header a {
+    vertical-align: middle;
+}
+
 header .account {
-    position: relative;
-    right: 4%;
+    float: right;
+    padding-top: 20px;
+    padding-right: 5%;
+    vertical-align: middle;
+    font-size: 150%;
+    color: #8d8d8d;
+    text-decoration: none;
 }
 
 
