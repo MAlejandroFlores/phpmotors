@@ -1,43 +1,79 @@
 @media only screen and (min-width: 600px) {
     body {
         background-image: url('/phpmotors/images/site/small_check.jpg');
-        background-color: lightblue;
+        background-color: white;
+        padding-left: 12%;
+        padding-right: 12%;
+        padding-top: 2%;
+        padding-bottom: 2%;
+    }
+    .content {
+        background-color: #ffffff;
+        border: 4px solid #4c96d7;
+        border-radius: 8px;
     }
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=East+Sea+Dokdo&display=swap');
 
 /*General content window*/
 
-.content {
-    background-color: #ffffff;
-    border: 4px solid #4c96d7;
-    border-radius: 8px;
+body {
+    margin: 0px;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'East Sea Dokdo', cursive;
+}
+
+h2 {
+    font-size: 150%;
+}
+
+p,
+li,
+table,
+button {
+    font-family: 'East Sea Dokdo', cursive;
+    font-size: 100%;
+}
+
+button {
+    background-color: #4c96d7;
+    padding: 3px 15px 3px;
 }
 
 
 /*Header*/
 
 header .account {
-    position: absolute;
-    right: 0;
+    position: relative;
+    right: 4%;
 }
 
 
 /*Navigation Bar*/
 
-ul {
+nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-li {
+nav li {
     display: inline;
+    width: 100%;
+    padding: 0;
 }
 
 nav {
     background-color: #3a3a3a;
     overflow: hidden;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    justify-content: flex-start;
 }
 
 nav a {
@@ -46,7 +82,7 @@ nav a {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 15px;
 }
 
 li a:hover {
@@ -57,14 +93,59 @@ li a:hover {
 
 /*Main section*/
 
-main h1 {
-    font-family: 'East Sea Dokdo', cursive;
-    font-size: 78px;
+main {
+    padding-left: 1%;
 }
 
 .dmc_delorean {
+    padding-left: 2%;
+}
+
+.dmc_delorean p {
+    font-family: 'East Sea Dokdo', cursive;
     color: #4c96d7;
-    font-size: 100px;
+    margin: -5px;
+    padding-left: 3%;
+}
+
+.delorean_image img {
+    position: relative;
+    text-align: center;
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+
+.reviews {
+    padding-left: 3px;
+}
+
+.reviews ul {
+    padding-left: 3px;
+}
+
+ul.reviews_list {
+    list-style-type: circle;
+}
+
+table {
+    -webkit-border-horizontal-spacing: 10px;
+}
+
+td {
+    padding: 15px 10px;
+    text-align: center;
+}
+
+.cell_image {
+    background-color: #4c96d7;
+    border: 1px solid #000000;
+    font-size: 100%;
+}
+
+table td img {
+    background-color: #4c96d7;
+    width: 100%;
 }
 
 
@@ -72,13 +153,16 @@ main h1 {
 
 footer {
     width: 100%;
-    position: relative;
     text-align: center;
-    bottom: 0px;
-    height: 100%;
+    position: relative;
+    max-width: 100%;
     border-top: 5px solid #8d8d8d;
+    color: #3a3a3a;
+    font-family: 'East Sea Dokdo', cursive;
+    padding: 1%;
 }
 
 footer p {
     margin: 0;
+    color: #3a3a3a;
 }
