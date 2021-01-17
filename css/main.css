@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=East+Sea+Dokdo&display=swap');
 @media only screen and (min-width: 600px) {
     body {
         background-image: url('/phpmotors/images/site/small_check.jpg');
@@ -14,7 +15,6 @@
     }
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=East+Sea+Dokdo&display=swap');
 
 /*General content window*/
 
@@ -82,7 +82,6 @@ nav {
     background-color: #3a3a3a;
     overflow: hidden;
     display: flex;
-    -webkit-flex-flow: row wrap;
     justify-content: flex-start;
 }
 
