@@ -17,6 +17,7 @@
             <a class="account" href="/phpmotors/accounts?action=login-page" title="Login or Register with PHP Motors">My Account</a>
         </header>
         <nav>
-            <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/navigation.php'; ?> 
+            <?php //include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/navigation.php'; 
+            echo $navList; ?> 
         </nav>
         <main>
