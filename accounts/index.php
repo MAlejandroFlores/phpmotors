@@ -1,16 +1,15 @@
 <?php
-// This is the main controller
+// This is the Accounts Controller
+
 
 // Get the database connecton file
-require_once 'library/connections.php';
+require_once '../library/connections.php';
 // Get the main model for use a needed
-require_once 'model/main-model.php';
+require_once '../model/main-model.php';
+
 
 // Get the array of classifications from DB using model
 $classifications = getClassifications();
-
-//echo '<pre>' . print_r($classifications, true) . '</pre>';
-//exit;
 
 // Build a navigation bar using the $classifications array
 $navList = '<ul>';
@@ -20,23 +19,16 @@ foreach ($classifications as $classification) {
 }
 $navList .= '</ul>';
 
-//echo $navList;
-//exit;
-
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
     $action = filter_input(INPUT_GET, 'action');
 }
 
-
 switch ($action) {
-    case 'template':
-        include 'view/template.php';
+    case 'login':
+        include '../view/login.php';
         break;
-    case 'login-page':
-        include 'accounts/index.php';
-        break;
-    default:
-        include 'view/home.php';
+    case 'registration':
+        include '../view/registration.php';
         break;
 }

@@ -1,5 +1,9 @@
 -- Query 1 Insert Tony Stak to clients dataBase
-INSERT INTO clients ( clientFirstname, clientLastname, clientEmail, clientPassword, comment) VALUES ("Tony", "Stark", "tony@starkent.com", "Iam1ronM@n", "I am the real Ironman");
+INSERT INTO 
+    clients 
+        ( clientFirstname, clientLastname, clientEmail, clientPassword, comment) 
+    VALUES 
+        ("Tony", "Stark", "tony@starkent.com", "Iam1ronM@n", "I am the real Ironman");
 
 --Query 2 Modify Tony's clientLevel
 UPDATE clients SET clientLevel = 3;
@@ -22,4 +26,4 @@ WHERE invModel = "Wrangler";
 
 --Query 6 update all record to add /phpmotors to path in invImage
 UPDATE inventory
-SET invImage=concat('/phpmotors',invImage);
+SET invImage=concat('/phpmotors',invImage) invThumbnail=concat('/phpmotors',invThumbnail);
