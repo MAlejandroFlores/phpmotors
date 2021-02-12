@@ -5,6 +5,8 @@
 require_once 'library/connections.php';
 // Get the main model for use a needed
 require_once 'model/main-model.php';
+// Get the accounts model for use a needed
+require_once 'model/accounts-model.php';
 
 // Get the array of classifications from DB using model
 $classifications = getClassifications();
@@ -31,12 +33,12 @@ if ($action == NULL) {
 
 switch ($action) {
     case 'template':
-        include 'view/template.php';
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/template.php';
         break;
     case 'login-page':
-        include 'accounts/index.php';
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/accounts/index.php';
         break;
     default:
-        include 'view/home.php';
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/home.php';
         break;
 }

@@ -6,7 +6,8 @@
 require_once '../library/connections.php';
 // Get the main model for use a needed
 require_once '../model/main-model.php';
-
+// Get the accounts model for use a needed
+require_once '../model/accounts-model.php';
 
 // Get the array of classifications from DB using model
 $classifications = getClassifications();
@@ -26,9 +27,38 @@ if ($action == NULL) {
 
 switch ($action) {
     case 'login':
-        include '../view/login.php';
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/login.php';
         break;
     case 'registration':
-        include '../view/registration.php';
+        $pageTitle = 'User Registation';
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/registration.php';
+        break;
+    case 'register_user':
+        //Filter and store variables
+        $clientFirstname = filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING);
+        $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING);
+        $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_STRING);
+        $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
+
+        //Checked for missing values
+        if (empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($clientPassword)) {
+            $_SESSION['message'] = '<p> Please provide information for all empty fileds </p>';
+            include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/registration.php';
+            exit;
+        }
+
+        $regOutcome = regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassword);
+
+        if ($regOutcome === 1) {
+            setcookie('firstname', $clientFirstname, strtotime('+1 year') . '/');
+            $_SESSION['message'] = "<p>Thanks for registering $clientFirstname. Please use your email and password to login.</p>";
+            include $_SERVER['DOCUMENT_ROOT'] .'/phpmotors/view/login.php';
+            exit;
+        } else {
+            $_SESSION['message'] = "<p>Sorry $clientFirstname, but the registration failed. Please try again.</p>";
+            include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/registration.php';
+            exit;
+        }
+
         break;
 }
