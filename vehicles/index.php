@@ -50,7 +50,7 @@ switch ($action) {
 
         //Checked for missing values
         if (empty($classificationName)) {
-            $_SESSION['message'] = '<p> Please provide information fro all empty form fields.</p>';
+            $_SESSION['message'] = '<p> Please provide information for all empty form fields.</p>';
             include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/add-classification.php';
             exit;
         }
@@ -83,8 +83,8 @@ switch ($action) {
         //Checked for missing values
         if (empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage)
          || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor) || empty($classificationId)) {
-            $_SESSION['message'] = '<p> Please provide information fro all empty form fields.</p>';
-            include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/add-classification.php';
+            $_SESSION['message'] = '<p> Please provide information for all empty form fields.</p>';
+            include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/add-vehicle.php';
             exit;
         }
 
