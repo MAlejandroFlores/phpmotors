@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/phpmotors/css/main.css" type="text/css" media="screen">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -16,8 +17,10 @@
             <a class="logo"><img src="/phpmotors/images/site/logo.png" alt="PHP Motors logo"></a>
             <a class="account" href="/phpmotors/accounts?action=login" title="Login or Register with PHP Motors">My Account</a>
         </header>
-        <nav>
+        <nav class="topnav">
+            <div class="topnav-centered">
             <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/nav.php'; 
             //echo $navList; ?> 
+            </div>
         </nav>
         <main>

@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=East+Sea+Dokdo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @media only screen and (min-width: 600px) {
     body {
         background-image: url('/phpmotors/images/site/small_check.jpg');
@@ -25,7 +27,7 @@ body {
 h1,
 h2,
 h3 {
-    font-family: 'East Sea Dokdo', cursive;
+    font-family: 'Montserrat', sans-serif;
 }
 
 h2 {
@@ -36,8 +38,10 @@ p,
 li,
 table,
 button,
-a {
-    font-family: 'East Sea Dokdo', cursive;
+a,
+label,
+input {
+    font-family: 'Architects Daughter', cursive;
     font-size: 100%;
 }
 
@@ -66,16 +70,33 @@ header .account {
 
 /*Navigation Bar*/
 
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+.topnav {
+    position: relative;
+    height: 50px;
 }
 
-nav li {
+.topnav-centered {
+    float: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+}
+
+.topnav li {
     display: inline;
     width: 100%;
     padding: 0;
+    height: 50px;
+    width: 150px;
 }
 
 nav {
@@ -85,13 +106,16 @@ nav {
     justify-content: flex-start;
 }
 
-nav a {
-    float: left;
+.topnav a {
+    float: none;
     color: #ffffff;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 15px;
+    width: 30px;
+    top: 50%;
+    left: 50%;
 }
 
 li a:hover {
@@ -127,6 +151,7 @@ main {
 
 .reviews {
     padding-left: 3px;
+    margin-left: 20px;
 }
 
 .reviews ul {
@@ -157,11 +182,15 @@ table td img {
     width: 100%;
 }
 
+.own_button {
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
 
 /*Footer*/
 
 footer {
-    width: 100%;
     text-align: center;
     position: relative;
     max-width: 100%;
@@ -174,4 +203,36 @@ footer {
 footer p {
     margin: 0;
     color: #3a3a3a;
+}
+
+
+/* Vehicle management*/
+
+.vehi-man,
+.add-vehi,
+.add-class,
+.registration_form,
+.login_form {
+    border: solid;
+    border-style: inset;
+    border-radius: 10px;
+    margin-top: 50px;
+    margin-left: 15%;
+    margin-bottom: 50px;
+    width: 65%;
+    padding: 10px;
+    padding-bottom: 40px;
+    padding-left: 40px;
+}
+
+.vehi-man h1,
+.add-vehi h1,
+.add-class h1,
+.registration_form h1,
+.login_form h1 {
+    text-align: center;
+}
+
+.vehi-man ul {
+    list-style-type: none;
 }

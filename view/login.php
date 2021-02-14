@@ -1,6 +1,6 @@
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/header.php'; ?>
 
-<div id=login_form>
+<div class="login_form">
   <h1> Login </h1>
 
   <?php

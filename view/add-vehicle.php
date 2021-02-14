@@ -1,6 +1,6 @@
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/header.php'; ?>
 
-
+<div class="add-vehi">
 
 <h1>Add Vehicle</h1>
 <p>* Note all the Fields are Required</p>
@@ -38,5 +38,8 @@
     <input type="submit" name="submit" value="Add Vehicle">
     <!-- Add the action name - value pair -->
     <input type="hidden" name="action" value="add_new_car">
+</form>
+
+</div>
 
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/footer.php'; ?>
