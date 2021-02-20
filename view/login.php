@@ -11,11 +11,19 @@
 
   <form action="new_login.php">
     <label for="email">Email address: *</label><br>
-    <input type="text" id="email" name="clientEmail"><br>
+    <input type="email" id="email" name="clientEmail" required <?php
+            if (isset($clientEmail)) {
+                echo $clientEmail;
+            }
+            ?>
+            ><br>
     <label for="password">Password: *</label><br>
-    <input type="text" id="password" name="clientPassword"><br><br>
+    <span>Password must be at least 8 characters and contains at least 1 number,
+        1 capital letter and 1 special character</span><br>
+    <input type="password" id="password" name="clientPassword" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" 
+            required><br><br>
     <input type="submit" value="Login">
-
+    <input type="hidden" name="action" value="Login">
     <p>* Fields required</p>
   </form>
 

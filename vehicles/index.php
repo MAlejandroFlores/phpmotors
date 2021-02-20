@@ -8,17 +8,13 @@ require_once '../library/connections.php';
 require_once '../model/main-model.php';
 // Get the vehicle model for use a needed
 require_once '../model/vehicles-model.php';
+// Get the functions library
+require_once '../library/functions.php';
 
 // Get the array of classifications from DB using model
 $classifications = getClassifications();
 
-// Build a navigation bar using the $classifications array
-$navList = '<ul>';
-$navList .= "<li><a href='/phpmotors/index.php' title='View the PHP Motors home page'>Home</a></li>";
-foreach ($classifications as $classification) {
-    $navList .= "<li><a href='/phpmotors/index.php?action=" . urlencode($classification['classificationName']) . "' title='View our $classification[classificationName] product line'>$classification[classificationName]</a></li>";
-}
-$navList .= '</ul>';
+$navList=buildNavList($classifications);
 
 $classificationList = '<select id="classification_id" name="classificationId">';
 $classificationList .= '<option value="Choose Car Classification"> Choose Car Classification</option>';
@@ -74,8 +70,8 @@ switch ($action) {
         $invDescription = filter_input(INPUT_POST, 'invDescription', FILTER_SANITIZE_STRING);
         $invImage = filter_input(INPUT_POST, 'invImage', FILTER_SANITIZE_STRING);
         $invThumbnail = filter_input(INPUT_POST, 'invThumbnail', FILTER_SANITIZE_STRING);
-        $invPrice = filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_STRING);
-        $invStock = filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_STRING);
+        $invPrice = filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $invStock = filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_NUMBER_INT);
         $invColor = filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_STRING);
         $classificationId = filter_input(INPUT_POST, 'classificationId', FILTER_SANITIZE_STRING);
         

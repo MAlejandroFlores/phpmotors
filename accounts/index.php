@@ -8,17 +8,13 @@ require_once '../library/connections.php';
 require_once '../model/main-model.php';
 // Get the accounts model for use a needed
 require_once '../model/accounts-model.php';
+// Get the functions library
+require_once '../library/functions.php';
 
 // Get the array of classifications from DB using model
 $classifications = getClassifications();
 
-// Build a navigation bar using the $classifications array
-$navList = '<ul>';
-$navList .= "<li><a href='/phpmotors/index.php' title='View the PHP Motors home page'>Home</a></li>";
-foreach ($classifications as $classification) {
-    $navList .= "<li><a href='/phpmotors/index.php?action=" . urlencode($classification['classificationName']) . "' title='View our $classification[classificationName] product line'>$classification[classificationName]</a></li>";
-}
-$navList .= '</ul>';
+$navList=buildNavList($classifications);
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
@@ -37,17 +33,23 @@ switch ($action) {
         //Filter and store variables
         $clientFirstname = filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING);
         $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING);
-        $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_STRING);
+        $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL);
         $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
 
+        $clientEmail = checkEmail($clientEmail);
+        $checkPassword = checkPassword($clientPassword);
         //Checked for missing values
-        if (empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($clientPassword)) {
+        // Check for missing data
+        if (empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($checkPassword)) {
             $_SESSION['message'] = '<p> Please provide information for all empty fileds </p>';
             include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/registration.php';
             exit;
         }
 
-        $regOutcome = regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassword);
+        // Hash the checked password
+        $hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
+
+        $regOutcome = regClient($clientFirstname, $clientLastname, $clientEmail, $hashedPassword);
 
         if ($regOutcome === 1) {
             setcookie('firstname', $clientFirstname, strtotime('+1 year') . '/');
@@ -59,6 +61,18 @@ switch ($action) {
             include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/registration.php';
             exit;
         }
+        break;
+    case 'Login':
+        $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL);
+        $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
 
+        $clientEmail = checkEmail($clientEmail);
+        $checkPassword = checkPassword($clientPassword);
+
+        if (empty($clientEmail) || empty($checkPassword)) {
+            $_SESSION['message'] = '<p> Please provide information for all empty fileds </p>';
+            include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/registration.php';
+            exit;
+        }
         break;
 }

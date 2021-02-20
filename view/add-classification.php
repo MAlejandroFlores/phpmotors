@@ -11,7 +11,8 @@ if (isset($_SESSION['message'])) {
 
 <form action="/phpmotors/vehicles/index.php" method="POST">
     <label for="classification_name">Classification Name</label><br>
-    <input type="text" id="classification_name" name="classificationName"><br><br>
+    <input type="text" id="classification_name" name="classificationName" 
+            required><br><br>
 
     <input type="submit" name="submit" value="Add Classification"><br><br>
     <!-- Add the action name - value pair -->
