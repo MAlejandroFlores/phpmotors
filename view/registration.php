@@ -13,14 +13,14 @@
         <label for="first_name">First name: *</label><br>
         <input type="text" id="first_name" name="clientFirstname" <?php
             if (isset($clientFirstname)) {
-                echo $clientFirstname;
+                echo "value='$clientFirstname'";
             }
             ?>
             required> <br>
         <label for="last_name">Last name: *</label><br>
         <input type="text" id="last_name" name="clientLastname" <?php
             if (isset($clientLastname)) {
-                echo $clientLastname;
+                echo "value='$clientLastname'";
             }
             ?>
             required><br>
@@ -28,7 +28,7 @@
         <label for="email">Email address: *</label><br>
         <input type="email" id="email" name="clientEmail" <?php
             if (isset($clientEmail)) {
-                echo $clientEmail;
+                echo "value='$clientEmail'";
             }
             ?>
             required><br>

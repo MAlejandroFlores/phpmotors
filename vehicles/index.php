@@ -16,13 +16,6 @@ $classifications = getClassifications();
 
 $navList=buildNavList($classifications);
 
-$classificationList = '<select id="classification_id" name="classificationId">';
-$classificationList .= '<option value="Choose Car Classification"> Choose Car Classification</option>';
-foreach ($classifications as $classification) {
-$classificationList .= "<option value='" . $classification['classificationId'] . "'>$classification[classificationName]</option>";
-}
-$classificationList .= '</select>';
-
 //echo '<pre>' . print_r($classifications, true) . '</pre>';
 //exit;
 
