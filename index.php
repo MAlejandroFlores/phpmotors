@@ -1,6 +1,8 @@
 <?php
 // This is the main controller
 
+// Create or access a Session
+session_start();
 // Get the database connecton file
 require_once 'library/connections.php';
 // Get the main model for use a needed

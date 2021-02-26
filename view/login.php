@@ -9,7 +9,7 @@
   }
   ?>
 
-  <form action="new_login.php">
+  <form action="/phpmotors/accounts/" method="POST">
     <label for="email">Email address: *</label><br>
     <input type="email" id="email" name="clientEmail" required <?php
             if (isset($clientEmail)) {
