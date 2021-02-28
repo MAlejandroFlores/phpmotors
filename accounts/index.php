@@ -39,6 +39,14 @@ switch ($action) {
 
         $clientEmail = checkEmail($clientEmail);
         $checkPassword = checkPassword($clientPassword);
+
+        //Checking for existing email
+        if (checkExistingEmail($clientEmail)){
+            $_SESSION['message'] = '<p class="notice">That email address already exists. Do you want to login instead?</p>';
+            include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/login.php';
+            exit; 
+        }
+
         //Checked for missing values
         // Check for missing data
         if (empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($checkPassword)) {
@@ -53,7 +61,7 @@ switch ($action) {
         $regOutcome = regClient($clientFirstname, $clientLastname, $clientEmail, $hashedPassword);
 
         if ($regOutcome === 1) {
-            setcookie('firstname', $clientFirstname, strtotime('+1 year') . '/');
+            setcookie('firstname', $clientFirstname, strtotime('+1 year'), '/');
             $_SESSION['message'] = "<p>Thanks for registering $clientFirstname. Please use your email and password to login.</p>";
             //include $_SERVER['DOCUMENT_ROOT'] .'/phpmotors/view/login.php';
             header('Location: /phpmotors/accounts/?action=login');
@@ -64,7 +72,7 @@ switch ($action) {
             exit;
         }
         break;
-    case 'Login':
+    case 'new_login':
         $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL);
         $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
 
@@ -99,11 +107,23 @@ switch ($action) {
         // Store the array into the session
         $_SESSION['clientData'] = $clientData;
         // Send them to the admin view
-        include '../view/admin.php';
+        //include '../view/admin.php';
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/admin.php';
         exit;
 
         break;
+    case 'logout':
+        session_destroy();
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/index.php';
+        break;
     default:
-        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/admin.php';
+        //echo 'Default';
+        //exit;
+        if (isset($_SESSION['loggedin'])) {
+            include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/admin.php';
+        } else {
+
+            header( 'Location: ../index.php');
+        }
         break;
 }

@@ -15,7 +15,14 @@
     <div class="content">
         <header>
             <a class="logo"><img src="/phpmotors/images/site/logo.png" alt="PHP Motors logo"></a>
-            <a class="account" href="/phpmotors/accounts?action=login" title="Login or Register with PHP Motors">My Account</a>
+            <?php if (isset($_SESSION['loggedin'])){
+                echo '<span class="account"><a href="/phpmotors/accounts" title="User">' .
+                $_SESSION['clientData']['clientFirstname'] . ' ' . $_SESSION['clientData']['clientLastname'] . '</a>';
+                echo '<a href="/phpmotors/accounts?action=logout" title="Logout">Logout</a></span>';
+            } else {
+                echo '<a class="account" href="/phpmotors/accounts?action=login" title="Login or Register with PHP Motors">My Account</a>' ;
+            }
+            ?>
         </header>
         <nav class="topnav">
             <div class="topnav-centered">

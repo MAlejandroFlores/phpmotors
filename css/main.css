@@ -53,18 +53,31 @@ button {
 
 /*Header*/
 
+header {
+    height: auto;
+}
+
 header a {
     vertical-align: middle;
 }
 
-header .account {
+header .account a {
     float: right;
-    padding-top: 20px;
+    padding-top: 0;
     padding-right: 5%;
-    vertical-align: middle;
-    font-size: 150%;
+    font-size: 1.2rem;
     color: #8d8d8d;
     text-decoration: none;
+}
+
+header .account {
+    float: right;
+    font-size: 150%;
+    padding-right: 20px;
+    padding-top: 5px;
+    color: #8d8d8d;
+    text-decoration: none;
+    display: block;
 }
 
 
