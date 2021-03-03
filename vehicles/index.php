@@ -15,7 +15,7 @@ require_once '../library/functions.php';
 // Get the array of classifications from DB using model
 $classifications = getClassifications();
 
-$navList=buildNavList($classifications);
+$navList = buildNavList($classifications);
 
 //echo '<pre>' . print_r($classifications, true) . '</pre>';
 //exit;
@@ -68,11 +68,13 @@ switch ($action) {
         $invStock = filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_NUMBER_INT);
         $invColor = filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_STRING);
         $classificationId = filter_input(INPUT_POST, 'classificationId', FILTER_SANITIZE_STRING);
-        
+
 
         //Checked for missing values
-        if (empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage)
-         || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor) || empty($classificationId)) {
+        if (
+            empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage)
+            || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor) || empty($classificationId)
+        ) {
             $_SESSION['message'] = '<p> Please provide information for all empty form fields.</p>';
             include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/add-vehicle.php';
             exit;
@@ -82,7 +84,7 @@ switch ($action) {
 
         if ($regOutcome === 1) {
             $_SESSION['message'] = "<p>The $invMake $invModel was added successfully!</p>";
-            include ($_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/add-vehicle.php');
+            include($_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/add-vehicle.php');
             exit;
         } else {
             $_SESSION['message'] = "<p>Sorry, but adding the $invMake $invModel failed. Please try again.</p>";
@@ -90,7 +92,32 @@ switch ($action) {
             exit;
         }
         break;
+        /* * ********************************** 
+    * Get vehicles by classificationId 
+    * Used for starting Update & Delete process 
+    * ********************************** */
+    case 'getInventoryItems':
+        // Get the classificationId 
+        $classificationId = filter_input(INPUT_GET, 'classificationId', FILTER_SANITIZE_NUMBER_INT);
+        // Fetch the vehicles by classificationId from the DB 
+        $inventoryArray = getInventoryByClassification($classificationId);
+        // Convert the array to a JSON object and send it back 
+        echo json_encode($inventoryArray);
+        break;
+    case 'mod':
+        $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+        $invInfo = getInvItemInfo($invId);
+        if (count($invInfo) < 1) {
+            $_SESSION['message'] = 'Sorry, no vehicle information could be found.';
+        }
+        include '../view/vehicle-update.php';
+        exit;
+        break;
+
     default:
+        $classificationList = buildClassificationList($classifications);
+
+
         include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-man.php';
         break;
 }

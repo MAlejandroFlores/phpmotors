@@ -6,7 +6,8 @@
 
 </footer>
 </div>
-<script src='js/script.js'></script>
+
 </body>
+<script src='/phpmotors/js/script.js'></script>
 
 </html>

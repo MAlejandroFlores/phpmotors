@@ -3,11 +3,12 @@
 /* 
  *   Vehicles model
  */
- 
+
 // function to Add new Classification
-function addClassification($classificationName) {
+function addClassification($classificationName)
+{
     // Create a connection object from the phpmotors connection function
-    $db = phpmotorsConnect(); 
+    $db = phpmotorsConnect();
     // The SQL statement to be used with the database 
     $sql = 'INSERT INTO carclassification 
                             (classificationName)
@@ -17,19 +18,20 @@ function addClassification($classificationName) {
     $stmt = $db->prepare($sql);
     //
     $stmt->bindValue(':classificationName', $classificationName, PDO::PARAM_STR);
-     // The next line runs the prepared statement 
-    $stmt->execute(); 
+    // The next line runs the prepared statement 
+    $stmt->execute();
     //Ask how many rows has changed 
     $rowsChanged = $stmt->rowCount();
     //Close the database
-    $stmt->closeCursor(); 
+    $stmt->closeCursor();
     // 
     return $rowsChanged;
 }
 
-function addVehicle($invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId) {
+function addVehicle($invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId)
+{
     // Create a connection object from the phpmotors connection function
-    $db = phpmotorsConnect(); 
+    $db = phpmotorsConnect();
     // The SQL statement to be used with the database 
     $sql = 'INSERT INTO inventory 
                             (invMake, invModel, invDescription, invImage, invThumbnail, invPrice, invStock, invColor, classificationId)
@@ -49,11 +51,37 @@ function addVehicle($invMake, $invModel, $invDescription, $invImage, $invThumbna
     $stmt->bindValue(':classificationId', $classificationId, PDO::PARAM_STR);
 
     // The next line runs the prepared statement 
-    $stmt->execute(); 
+    $stmt->execute();
     //Ask how many rows has changed 
     $rowsChanged = $stmt->rowCount();
     //Close the database
-    $stmt->closeCursor(); 
+    $stmt->closeCursor();
     //
     return $rowsChanged;
+}
+
+// Get vehicles by classificationId 
+function getInventoryByClassification($classificationId)
+{
+    $db = phpmotorsConnect();
+    $sql = ' SELECT * FROM inventory WHERE classificationId = :classificationId';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':classificationId', $classificationId, PDO::PARAM_INT);
+    $stmt->execute();
+    $inventory = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $inventory;
+}
+
+// Get vehicle information by invId
+function getInvItemInfo($invId)
+{
+    $db = phpmotorsConnect();
+    $sql = 'SELECT * FROM inventory WHERE invId = :invId';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+    $stmt->execute();
+    $invInfo = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $invInfo;
 }

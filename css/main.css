@@ -141,6 +141,7 @@ li a:hover {
 
 main {
     padding-left: 1%;
+    padding-bottom: 25px;
 }
 
 .dmc_delorean {
@@ -248,4 +249,13 @@ footer p {
 
 .vehi-man ul {
     list-style-type: none;
+}
+
+
+/* ---- MANAGEMENT VEHICLE TABLE ---- */
+
+#inventoryDisplay td,
+td {
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
