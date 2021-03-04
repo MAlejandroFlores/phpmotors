@@ -15,7 +15,7 @@ require_once '../library/functions.php';
 // Get the array of classifications from DB using model
 $classifications = getClassifications();
 
-$navList=buildNavList($classifications);
+$navList = buildNavList($classifications);
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
@@ -24,10 +24,11 @@ if ($action == NULL) {
 
 switch ($action) {
     case 'login':
+        $page_title = 'New Login';
         include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/login.php';
         break;
     case 'registration':
-        $pageTitle = 'User Registation';
+        $page_title = 'User Registation';
         include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/registration.php';
         break;
     case 'register_user':
@@ -41,10 +42,10 @@ switch ($action) {
         $checkPassword = checkPassword($clientPassword);
 
         //Checking for existing email
-        if (checkExistingEmail($clientEmail)){
+        if (checkExistingEmail($clientEmail)) {
             $_SESSION['message'] = '<p class="notice">That email address already exists. Do you want to login instead?</p>';
             include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/login.php';
-            exit; 
+            exit;
         }
 
         //Checked for missing values
@@ -68,6 +69,7 @@ switch ($action) {
             exit;
         } else {
             $_SESSION['message'] = "<p>Sorry $clientFirstname, but the registration failed. Please try again.</p>";
+            $page_title = 'Failed Registry';
             include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/registration.php';
             exit;
         }
@@ -93,10 +95,10 @@ switch ($action) {
         $hashCheck = password_verify($clientPassword, $clientData['clientPassword']);
         // If the hashes don't match create an error
         // and return to the login view
-        if(!$hashCheck) {
-          $_SESSION['message'] = '<p class="notice">Please check your password and try again.</p>';
-          include '../view/login.php';
-          exit;
+        if (!$hashCheck) {
+            $_SESSION['message'] = '<p class="notice">Please check your password and try again.</p>';
+            include '../view/login.php';
+            exit;
         }
         // A valid user exists, log them in
         $_SESSION['loggedin'] = TRUE;
@@ -108,22 +110,25 @@ switch ($action) {
         $_SESSION['clientData'] = $clientData;
         // Send them to the admin view
         //include '../view/admin.php';
+        $page_title = 'Account';
         include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/admin.php';
         exit;
 
         break;
     case 'logout':
         session_destroy();
-        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/index.php';
+        unset($_SESSION);
+        setcookie('PHPSESSID', '', strtotime('-1 hour'), '/');
+        header('Location: /phpmotors/');
         break;
     default:
         //echo 'Default';
         //exit;
         if (isset($_SESSION['loggedin'])) {
+            $page_title = 'Account';
             include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/admin.php';
         } else {
-
-            header( 'Location: ../index.php');
+            header('Location: /phpmotors/index.php');
         }
         break;
 }

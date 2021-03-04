@@ -1,14 +1,9 @@
-<?php if (isset($invInfo['invMake']) && isset($invInfo['invModel'])) {
-    echo "Modify $invInfo[invMake] $invInfo[invModel]";
-} elseif (isset($invMake) && isset($invModel)) {
-    echo "Modify $invMake $invModel";
-} ?>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/header.php'; ?>
 
 <?php
 //If Not seesion login or Client level > 1, redirect to home
 if (!(isset($_SESSION['loggedin']) && ($_SESSION['clientData']['clientLevel'] > '1'))) {
-    header('Location: ../index.php');
+    header('Location: /phpmotors/index.php');
 }
 ?>
 
@@ -20,10 +15,10 @@ foreach ($classifications as $classification) {
     if (isset($classificationId)) {
         if ($classification['classificationId'] === $classificationId) {
             $classificationList .= ' selected ';
-        } elseif (isset($invInfo['classificationId'])) {
-            if ($classification['classificationId'] === $invInfo['classificationId']) {
-                $classifList .= ' selected ';
-            }
+        }
+    } elseif (isset($invInfo['classificationId'])) {
+        if ($classification['classificationId'] === $invInfo['classificationId']) {
+            $classificationList .= ' selected ';
         }
     }
     $classificationList .= ">$classification[classificationName]</option>";
@@ -43,10 +38,10 @@ $classificationList .= '</select>';
         echo $_SESSION['message'];
     }
     ?>
-
-
     <form action="/phpmotors/vehicles/index.php" method="POST">
         <?php
+        //print_r($invInfo);
+        //exit;
         if (isset($classificationList)) {
             echo $classificationList;
         }
@@ -71,42 +66,62 @@ $classificationList .= '</select>';
         <input type="text" id="inv_description" name="invDescription" <?php
                                                                         if (isset($invDescription)) {
                                                                             echo "value='$invDescription'";
+                                                                        } elseif (isset($invInfo['invDescription'])) {
+                                                                            echo "value='$invInfo[invDescription]'";
                                                                         }
                                                                         ?> required><br>
         <label for="inv_image">Image Path</label><br>
         <input type="text" id="inv_image" name="invImage" <?php
                                                             if (isset($invImage)) {
                                                                 echo "value='$invImage'";
+                                                            } elseif (isset($invInfo['invImage'])) {
+                                                                echo "value='$invInfo[invImage]'";
                                                             }
                                                             ?> required><br>
         <label for="inv_thumbnail">Thumbnail Path</label><br>
         <input type="text" id="inv_thumbnail" name="invThumbnail" <?php
                                                                     if (isset($invThumbnail)) {
                                                                         echo "value='$invThumbnail'";
+                                                                    } elseif (isset($invInfo['invThumbnail'])) {
+                                                                        echo "value='$invInfo[invThumbnail]'";
                                                                     }
                                                                     ?> required><br>
         <label for="inv_price">Price</label><br>
         <input type="text" id="inv_price" name="invPrice" <?php
                                                             if (isset($invPrice)) {
                                                                 echo "value='$invPrice'";
+                                                            } elseif (isset($invInfo['invPrice'])) {
+                                                                echo "value='$invInfo[invPrice]'";
                                                             }
                                                             ?> required><br>
         <label for="inv_stock"># In Stock</label><br>
         <input type="text" id="inv_stock" name="invStock" <?php
                                                             if (isset($invStock)) {
                                                                 echo "value='$invStock'";
+                                                            } elseif (isset($invInfo['invStock'])) {
+                                                                echo "value='$invInfo[invStock]'";
                                                             }
                                                             ?> required><br>
         <label for="inv_color">Color</label><br>
         <input type="text" id="inv_color" name="invColor" <?php
                                                             if (isset($invColor)) {
                                                                 echo "value='$invColor'";
+                                                            } elseif (isset($invInfo['invColor'])) {
+                                                                echo "value='$invInfo[invColor]'";
                                                             }
                                                             ?> required><br>
 
         <input type="submit" name="submit" value="Update Vehicle">
         <!-- Add the action name - value pair -->
         <input type="hidden" name="action" value="updateVehicle">
+        <!-- Add the Inventary ID - value pair -->
+        <input type="hidden" name="invId" value=<?php
+                                                if (isset($invInfo['invId'])) {
+                                                    echo $invInfo['invId'];
+                                                } elseif (isset($invId)) {
+                                                    echo $invId;
+                                                }
+                                                ?>>
     </form>
 
 </div>

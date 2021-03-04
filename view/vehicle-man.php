@@ -8,9 +8,12 @@
 
 <?php
 //If Not seesion login or Client level > 1, redirect to home
-if (!(isset($_SESSION['loggedin']) && ($_SESSION['clientData']['clientLevel'] > '1'))) {
-    header('Location: ../index.php');
+if (!$_SESSION['loggedin'] && ($_SESSION['clientData']['clientLevel'] > '1')) {
+    header('Location: /phpmotors/index.php');
 }
+if (isset($_SESSION['message'])) {
+    $message = $_SESSION['message'];
+   }
 ?>
 
 <div class="vehi-man">
@@ -23,8 +26,8 @@ if (!(isset($_SESSION['loggedin']) && ($_SESSION['clientData']['clientLevel'] > 
 </div>
 
 <?php
-if (isset($_SESSION['message'])) {
-    echo $_SESSION['message'];
+if (isset($message)) {
+    echo $message;
 }
 if (isset($classificationList)) {
     echo '<h2>Vehicles By Classification</h2>';
@@ -37,5 +40,6 @@ if (isset($classificationList)) {
 </noscript>
 <table id="inventoryDisplay"></table>
 
-<script src="../js/inventory.js"></script>
+<script src="/phpmotors/js/inventory.js"></script>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/footer.php'; ?>
+<?php unset($_SESSION['message']); ?>

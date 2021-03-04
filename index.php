@@ -36,6 +36,7 @@ switch ($action) {
         include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/accounts/index.php';
         break;
     default:
+        $page_title = 'Home';
         include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/home.php';
         break;
 }
