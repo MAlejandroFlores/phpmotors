@@ -13,7 +13,9 @@ if (!(isset($_SESSION['loggedin']) && ($_SESSION['clientData']['clientLevel'] > 
 
 <?php
 if (isset($_SESSION['message'])) {
-    echo $_SESSION['message'];
+    echo '<p class="infoMessage">';
+        echo $_SESSION['message'];
+        echo '</p>';
 }
 ?>
 

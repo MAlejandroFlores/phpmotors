@@ -1,11 +1,11 @@
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/header.php'; ?>
-
 <?php
 //If Not seesion login or Client level > 1, redirect to home
 if (!(isset($_SESSION['loggedin']) && ($_SESSION['clientData']['clientLevel'] > '1'))) {
     header('Location: /phpmotors/index.php');
 }
 ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/header.php'; ?>
+
 
 <?php
 $classificationList = '<select id="classification_id" name="classificationId">';
@@ -33,7 +33,9 @@ $classificationList .= '</select>';
     <p>Confirm Vehicle Deletion. The delete is permanent.</p>
     <?php
     if (isset($_SESSION['message'])) {
+        echo '<p class="infoMessage">';
         echo $_SESSION['message'];
+        echo '</p>';
     }
     ?>
     <form action="/phpmotors/vehicles/index.php" method="POST">
@@ -56,12 +58,13 @@ $classificationList .= '</select>';
                                                                 echo "value='$invInfo[invModel]'";
                                                             }
                                                             ?>readonly><br>
-        <textarea name="invDescription" id="invDescription"> <?php
+        <label for="invDescription">Description</label><br>
+        <textarea readonly name="invDescription" id="invDescription"> <?php
                                                                     if (isset($invInfo['invDescription'])) {
                                                                         echo $invInfo['invDescription'];
                                                                     }
                                                                     ?>
-                                                            readonly</textarea><br>
+                                                            </textarea><br>
 
         <input type="submit" name="submit" value="Delete Vehicle">
         <!-- Add the action name - value pair -->
@@ -76,3 +79,4 @@ $classificationList .= '</select>';
 </div>
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/footer.php'; ?>
+<?php unset($_SESSION['message']); ?>

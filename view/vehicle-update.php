@@ -1,11 +1,14 @@
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/header.php'; ?>
-
 <?php
 //If Not seesion login or Client level > 1, redirect to home
 if (!(isset($_SESSION['loggedin']) && ($_SESSION['clientData']['clientLevel'] > '1'))) {
     header('Location: /phpmotors/index.php');
 }
+if (isset($_SESSION['message'])) {
+    $message = $_SESSION['message'];
+}
 ?>
+
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/header.php'; ?>
 
 <?php
 $classificationList = '<select id="classification_id" name="classificationId">';
@@ -34,9 +37,10 @@ $classificationList .= '</select>';
 
     <p>* Note all the Fields are Required</p>
     <?php
-    if (isset($_SESSION['message'])) {
-        echo $_SESSION['message'];
-    }
+    if (isset($message)) {
+        echo '<p class="infoMessage">';
+        echo $message;
+        echo '</p><br>';    }
     ?>
     <form action="/phpmotors/vehicles/index.php" method="POST">
         <?php
@@ -127,3 +131,4 @@ $classificationList .= '</select>';
 </div>
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/footer.php'; ?>
+<?php unset($_SESSION['message']); ?>

@@ -121,6 +121,104 @@ switch ($action) {
         setcookie('PHPSESSID', '', strtotime('-1 hour'), '/');
         header('Location: /phpmotors/');
         break;
+
+    case 'mod_user':
+        $page_title = 'Update Account Information';
+
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/client-update.php';
+        break;
+
+    case 'accountUpdate':
+        //Filter and store variables
+        $clientFirstname = filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING);
+        $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING);
+        $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL);
+        $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
+
+        //Validate Email requirements
+        $clientEmail = checkEmail($clientEmail);
+
+        //Checking for existing email
+        if ($clientEmail != $_SESSION['clientData']['clientEmail']) {
+            if (checkExistingEmail($clientEmail)) {
+                $_SESSION['message'] = 'That email address ' . $clientEmail . ' already exists in our database. Please try using a different one';
+                $clientEmail = $_SESSION['clientData']['clientEmail'];
+                include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/client-update.php';
+                exit;
+            }
+        }
+
+        //Checked for missing values
+        if (empty($clientFirstname) || empty($clientLastname) || empty($clientEmail)) {
+            $_SESSION['message'] = 'Please provide information for all empty fileds';
+            include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/client-update.php';
+            exit;
+        }
+
+        // Hash the checked password
+        $updateResult = updateClient($clientFirstname, $clientLastname, $clientEmail, $clientId);
+
+        if ($updateResult === 1) {
+            //Update Session Info
+            $clientData = getClientByID($clientId);
+            $_SESSION['clientData'] = $clientData;
+            setcookie('firstname', $_SESSION['clientData']['clientFirstname'], strtotime('+1 year'), '/');
+            $_SESSION['message'] = "$clientFirstname. Your information has been updated.";
+            include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/admin.php';
+            exit;
+        } else {
+            $_SESSION['message'] = "Sorry $clientFirstname, we could not update your account information. Please try again.";
+            $page_title = 'Failed Account Change';
+            include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/client-update.php';
+            exit;
+        }
+        break;
+
+    case 'passwordUpdate':
+        //Filter and store variables
+        $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
+        $clientId = $_SESSION['clientData']['clientId'];
+
+        if (empty($clientPassword)) {
+            $_SESSION['message'] = 'Please provide a password, must not be blank.!';
+            //print_r($_SESSION);
+            //exit;
+            include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/client-update.php';
+            exit;
+        } 
+
+        $checkPassword = checkPassword($clientPassword, $clientId);
+        
+        //Checked for missing values
+        // Check for missing data
+        
+        if (empty($checkPassword)) {
+            $_SESSION['message'] = 'Please provide a valid password.';
+            //print_r($_SESSION);
+            //exit;
+            include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/client-update.php';
+            exit;
+        }
+
+        // Hash the checked password
+        $hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
+
+        $updateResult = updatePasword($hashedPassword, $clientId);
+
+        if ($updateResult === 1) {
+            $_SESSION['message'] = $_SESSION['clientData']['clientFirstname'] . ", your password has been changed succesfully.!";
+            //include $_SERVER['DOCUMENT_ROOT'] .'/phpmotors/view/login.php';
+            $page_title = 'Password Changed Succesfully';
+            include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/client-update.php';
+            exit;
+        } else {
+            $_SESSION['message'] = "Sorry $clientFirstname, but the password change failed. Please try again.";
+            $page_title = 'Password Changed Error';
+            include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/registration.php';
+            exit;
+        }
+        break;
+
     default:
         //echo 'Default';
         //exit;

@@ -107,7 +107,7 @@ switch ($action) {
     case 'mod':
         $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
         $invInfo = getInvItemInfo($invId);
-        if (count($invInfo) < 1) {
+        if (!isset($invId) || count($invInfo) < 1) {
             $_SESSION['message'] = 'Sorry, no vehicle information could be found.';
         }
         if (isset($invInfo['invMake']) && isset($invInfo['invModel'])) {
@@ -158,7 +158,7 @@ switch ($action) {
     case 'del':
         $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
         $invInfo = getInvItemInfo($invId);
-        if (count($invInfo) < 1) {
+        if (!isset($invId) || count($invInfo) < 1) {
             $_SESSION['message'] = 'Sorry, no vehicle information could be found.';
         }
         if (isset($invInfo['invMake']) && isset($invInfo['invModel'])) {
