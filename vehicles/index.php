@@ -189,6 +189,28 @@ switch ($action) {
         }
         break;
 
+    case 'classification':
+        $classificationName = filter_input(INPUT_GET, 'classificationName', FILTER_SANITIZE_STRING);
+        $vehicles = getVehiclesByClassification($classificationName);
+        if (!count($vehicles)) {
+            $message = "<p class='notice'>Sorry, no $classificationName vehicles could be found.</p>";
+        } else {
+            $vehicleDisplay = buildVehiclesDisplay($vehicles);
+        }
+        $page_title = "$classificationName vehicles";
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/classification.php';
+        break;
+
+    case 'getvehicleinfo':
+        $vehicleId = filter_input(INPUT_GET, 'vehicleId', FILTER_SANITIZE_STRING);
+        $vehicle = getVehicleById($vehicleId);
+        if (!count($vehicle)) {
+            $message = "<p class='notice'>Sorry, no vehicle details could be found.</p>";
+        } else {
+            $vehicleDetail = buildVehicleDetail($vehicle);
+        }
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-detail.php';
+        break;
     default:
         $classificationList = buildClassificationList($classifications);
         $page_title = 'Vehicle Management';

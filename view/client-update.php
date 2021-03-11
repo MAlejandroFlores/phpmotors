@@ -52,16 +52,11 @@ if (isset($_SESSION['message'])) {
                                                                         echo $_SESSION['clientData']['clientEmail'];
                                                                     }
                                                                     ?>" required> <br><br>
-        
+
         <input type="submit" name="submit" value="Update Info">
         <!-- Add the action name - value pair -->
         <input type="hidden" name="action" value="accountUpdate">
-        <input type="hidden" name="clientId" value="<?php
-                                                if (isset($clientId)) {
-                                                    echo "$clientId";
-                                                } elseif (isset($_SESSION['clientData']['clientId'])) {
-                                                    echo $_SESSION['clientData']['clientId'];
-                                                }?>">
+        <input type="hidden" name="clientId" value="<?php echo $_SESSION['clientData']['clientId']; ?>">
     </form>
     <br>
     <h3> Update Password</h3>
@@ -76,12 +71,7 @@ if (isset($_SESSION['message'])) {
         <input type="submit" name="submit" value="Update Password">
         <!-- Add the action name - value pair -->
         <input type="hidden" name="action" value="passwordUpdate">
-        <input type="hidden" name="clientId" value="<?php
-                                                if (isset($clientId)) {
-                                                    echo "$clientId";
-                                                } elseif (isset($_SESSION['clientId'])) {
-                                                    echo $_SESSION['clientId'];
-                                                }?>">
+        <input type="hidden" name="clientId" value="<?php echo $_SESSION['clientData']['clientId']; ?>">
     </form>
 </div>
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/footer.php'; ?>

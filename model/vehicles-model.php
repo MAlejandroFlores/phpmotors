@@ -127,7 +127,8 @@ function updateVehicle($invMake, $invModel, $invDescription, $invImage, $invThum
 }
 
 //Delete vehicle
-function deleteVehicle($invId) {
+function deleteVehicle($invId)
+{
     // Create a connection object from the phpmotors connection function
     $db = phpmotorsConnect();
     // The SQL statement to be used with the database 
@@ -147,3 +148,27 @@ function deleteVehicle($invId) {
     return $rowsChanged;
 }
 
+// Get a list of vehicles based on the classification.
+function getVehiclesByClassification($classificationName)
+{
+    $db = phpmotorsConnect();
+    $sql = 'SELECT * FROM inventory WHERE classificationId IN (SELECT classificationId FROM carclassification WHERE classificationName = :classificationName)';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':classificationName', $classificationName, PDO::PARAM_STR);
+    $stmt->execute();
+    $vehicles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $vehicles;
+}
+
+function getVehicleById($vehicleId) {
+    $db = phpmotorsConnect();
+    $sql = 'SELECT * FROM inventory WHERE invId IN (SELECT invId FROM inventory WHERE invId = :invId)';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':invId', $vehicleId, PDO::PARAM_STR);
+    $stmt->execute();
+    $vehicle = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $vehicle;
+
+}
