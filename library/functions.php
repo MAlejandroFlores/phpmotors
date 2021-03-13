@@ -68,7 +68,7 @@ function buildVehicleDetail($vehicle)
     $dv .= '<div class="image_area">';
     $dv .= "<img src='/phpmotors$info[invImage]' alt='Image of $info[invMake] $info[invModel] n phpmotors.com'>";
     $dv .= '</div><div class="text_area">';
-    $dv .= "<h3>Price:   $" . number_format($info['invPrice']) . "</h1>";
+    $dv .= "<h3>Price:   $" . number_format($info['invPrice']) . "</h3>";
     $dv .= '<hr>';
     $dv .= '<ul>';
     $dv .= "<li><h3>$info[invMake] $info[invModel] Details</h3></li>" ;
