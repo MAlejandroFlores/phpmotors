@@ -47,10 +47,10 @@ function  buildVehiclesDisplay($vehicles)
   $dv = '<ul id="inv-display">';
   foreach ($vehicles as $vehicle) {
     $dv .= '<li>';
-    $dv .= "<a href='/phpmotors/vehicles/?action=getvehicleinfo&vehicleId=" . urlencode($vehicle['invId']) . "'> <img src='/phpmotors$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'></a>"; 
+    $dv .= "<a href='/phpmotors/vehicles/?action=getvehicleinfo&vehicleId=" . urlencode($vehicle['invId']) . "'> <img src='/phpmotors$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
     $dv .= '<hr>';
-    $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2>";
-    $dv .= "<span>$vehicle[invPrice]</span>";
+    $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2></a>";
+    $dv .= "<span>$" . number_format($vehicle['invPrice']) . "</span>";
     $dv .= '</li>';
   }
   $dv .= '</ul>';
@@ -58,6 +58,23 @@ function  buildVehiclesDisplay($vehicles)
 }
 
 // Build the Vehicle display view
-function buildVehicleDetail($vehicle) {
+function buildVehicleDetail($vehicle)
+{
+  $dv = '<div id="info-display">';
 
+  foreach ($vehicle as $info) {
+    $dv .= "<h1> $info[invMake] $info[invModel] Details </h1>";
+    $dv .= "<img src='/phpmotors$info[invImage]' alt='Image of $info[invMake] $info[invModel] n phpmotors.com'>";
+    $dv .= "<h3>Price:   $" . number_format($info['invPrice']) . "</h1>";
+    $dv .= '<hr>';
+    $dv .= '<ul>';
+    $dv .= "<li><h3>$info[invMake] $info[invModel] Details</h3></li>" ;
+    $dv .= "<li> $info[invDescription] </li>" ;
+    $dv .= "<li> Color: $info[invColor] </li>" ;
+    $dv .= "<li> # in Stock: $info[invStock] </li>" ;
+
+    $dv .= '</ul>';
+    $dv .= '</div>';
+  }
+  return $dv;
 }

@@ -14,7 +14,7 @@
 </div>
 
 <div class="delorean_image">
-    <img src="/phpmotors/images/delorean.jpg" alt="Delorean Car">
+    <img src="/phpmotors/images/vehicles/delorean.jpg" alt="Delorean Car">
 </div>
 <div class="reviews">
     <h2>DMC Delorean Reviews</h2>

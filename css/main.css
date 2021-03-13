@@ -264,7 +264,7 @@ td {
 }
 
 
-/* ----   ----*/
+/* ---- VEHICLE DISPLAY CLASSIFICATION  ----*/
 
 #inv-display {
     margin: 0;
@@ -284,6 +284,39 @@ td {
     max-width: 100%;
 }
 
+
+/* ---- VEHICLE DETAILED VIEW ---- */
+
+#info-display img {
+    width: 100%;
+    height: auto;
+}
+
+#info-display h1,
+h3 {
+    padding-left: 10px;
+}
+
+#info-display ul {
+    margin-right: 20px;
+}
+
+#info-display li {
+    list-style-type: none;
+    color: #808080;
+    text-align: justify;
+    padding: 10px;
+}
+
+#info-display img {
+    width: 100%;
+    height: auto;
+}
+
+#info-display li:nth-child(even) {
+    background-color: #f0ecec;
+}
+
 @media only screen and (min-width: 600px) {
     body {
         background-image: url('/phpmotors/images/site/small_check.jpg');
@@ -298,22 +331,14 @@ td {
         border: 4px solid #4c96d7;
         border-radius: 8px;
     }
+    #info-display h1,
+    h3 {
+        padding-left: 30px;
+    }
 }
 
 @media only screen and (min-width: 768px) {
-    body {
-        background-image: url('/phpmotors/images/site/small_check.jpg');
-        background-color: white;
-        padding-left: 12%;
-        padding-right: 12%;
-        padding-top: 2%;
-        padding-bottom: 2%;
-    }
-    .content {
-        background-color: #ffffff;
-        border: 4px solid #4c96d7;
-        border-radius: 8px;
-    }
+    /* ---- VEHICLE DISPLAY CLASSIFICATION ---- */
     /* For vehicle display in classification view */
     #inv-display {
         flex-flow: row wrap;
@@ -353,5 +378,25 @@ td {
     }
     #inv-display div {
         width: 100%;
+    }
+    /* ---- VEHICLE DETAILED VIEW ---- */
+    #info-display {
+        border: solid 1px #f0ecec;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        margin: 65px;
+        text-align: center;
+    }
+    #info-display img {
+        width: 100%;
+        height: auto;
+    }
+    #info-display ul {
+        margin-right: 40px;
+        margin-bottom: 40px;
+    }
+    #info-display li {
+        color: #808080;
+        padding: 10px;
     }
 }

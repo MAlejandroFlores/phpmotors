@@ -193,7 +193,7 @@ switch ($action) {
         $classificationName = filter_input(INPUT_GET, 'classificationName', FILTER_SANITIZE_STRING);
         $vehicles = getVehiclesByClassification($classificationName);
         if (!count($vehicles)) {
-            $message = "<p class='notice'>Sorry, no $classificationName vehicles could be found.</p>";
+            $_SESSION['message'] = "<p class='notice'>Sorry, no $classificationName vehicles could be found.</p>";
         } else {
             $vehicleDisplay = buildVehiclesDisplay($vehicles);
         }
@@ -205,10 +205,12 @@ switch ($action) {
         $vehicleId = filter_input(INPUT_GET, 'vehicleId', FILTER_SANITIZE_STRING);
         $vehicle = getVehicleById($vehicleId);
         if (!count($vehicle)) {
-            $message = "<p class='notice'>Sorry, no vehicle details could be found.</p>";
+            $_SESSION['message'] = "<p class='notice'>Sorry, no vehicle details could be found.</p>";
         } else {
-            $vehicleDetail = buildVehicleDetail($vehicle);
+            $vehicleInfo = buildVehicleDetail($vehicle);
+            $page_title = $vehicle[0]['invMake'] . ' ' . $vehicle[0]['invModel'] . ' Details';
         }
+        
         include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-detail.php';
         break;
     default:
