@@ -22,6 +22,7 @@ h1,
 h2,
 h3 {
     font-family: 'Montserrat', sans-serif;
+    text-align: center;
 }
 
 h2 {
@@ -273,6 +274,10 @@ td {
     flex-direction: column;
 }
 
+#info-display ul {
+    padding-left: 10px;
+}
+
 #inv-display li {
     margin-bottom: .5em;
     border: 1px #ccc solid;
@@ -331,34 +336,11 @@ h3 {
         border: 4px solid #4c96d7;
         border-radius: 8px;
     }
-    #info-display h1,
-    h3 {
-        padding-left: 30px;
-    }
+    /* ---- VEHICLE DETAILED VIEW ---- */
 }
 
 @media only screen and (min-width: 768px) {
     /* ---- VEHICLE DISPLAY CLASSIFICATION ---- */
-    /* For vehicle display in classification view */
-    #inv-display {
-        flex-flow: row wrap;
-        justify-content: flex-start;
-    }
-    #inv-display h2 {
-        font-size: 1rem;
-    }
-    #inv-display li {
-        max-width: 200px;
-        flex: 1 0 auto;
-        text-align: center;
-        height: 250px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-    #inv-display div {
-        width: 100%;
-    }
     /* For vehicle display in classification view */
     #inv-display {
         flex-flow: row wrap;
@@ -384,16 +366,29 @@ h3 {
         border: solid 1px #f0ecec;
         border-radius: 10px;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        margin: 65px;
+        margin: 20px;
         text-align: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+    }
+    #info-display .image_area {
+        grid-row: 1;
+        grid-column: 1;
+    }
+    #info-display .text_area {
+        grid-row: 1;
+        grid-column: 2;
     }
     #info-display img {
         width: 100%;
         height: auto;
+        margin-top: 60px;
     }
     #info-display ul {
-        margin-right: 40px;
-        margin-bottom: 40px;
+        padding: 0px;
+        margin-right: 0px;
+        margin-bottom: 0px;
     }
     #info-display li {
         color: #808080;

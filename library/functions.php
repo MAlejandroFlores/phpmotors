@@ -60,11 +60,14 @@ function  buildVehiclesDisplay($vehicles)
 // Build the Vehicle display view
 function buildVehicleDetail($vehicle)
 {
-  $dv = '<div id="info-display">';
+  $dv = "<h1>" . $vehicle[0]['invMake'] . ' ' . $vehicle[0]['invModel'] . " Details </h1>";
+
+  $dv .= '<div id="info-display">';
 
   foreach ($vehicle as $info) {
-    $dv .= "<h1> $info[invMake] $info[invModel] Details </h1>";
+    $dv .= '<div class="image_area">';
     $dv .= "<img src='/phpmotors$info[invImage]' alt='Image of $info[invMake] $info[invModel] n phpmotors.com'>";
+    $dv .= '</div><div class="text_area">';
     $dv .= "<h3>Price:   $" . number_format($info['invPrice']) . "</h1>";
     $dv .= '<hr>';
     $dv .= '<ul>';
@@ -74,7 +77,7 @@ function buildVehicleDetail($vehicle)
     $dv .= "<li> # in Stock: $info[invStock] </li>" ;
 
     $dv .= '</ul>';
-    $dv .= '</div>';
+    $dv .= '</div></div>';
   }
   return $dv;
 }
