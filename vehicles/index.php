@@ -11,6 +11,8 @@ require_once '../model/main-model.php';
 require_once '../model/vehicles-model.php';
 // Get the functions library
 require_once '../library/functions.php';
+// Get the uploads model
+require_once '../model/uploads-model.php';
 
 // Get the array of classifications from DB using model
 $classifications = getClassifications();
@@ -195,6 +197,8 @@ switch ($action) {
         if (!count($vehicles)) {
             $_SESSION['message'] = "<p class='notice'>Sorry, no $classificationName vehicles could be found.</p>";
         } else {
+            //print("<pre>".print_r($vehicles,true)."</pre>");
+            //exit;
             $vehicleDisplay = buildVehiclesDisplay($vehicles);
         }
         $page_title = "$classificationName vehicles";
@@ -209,6 +213,8 @@ switch ($action) {
         } else {
             $vehicleInfo = buildVehicleDetail($vehicle);
             $page_title = $vehicle[0]['invMake'] . ' ' . $vehicle[0]['invModel'] . ' Details';
+            $thumbnails = getVehicleThumbnailsPath($vehicleId);
+            $thumbnailsView = buildThumbnailView($thumbnails);
         }
         
         include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-detail.php';

@@ -46,7 +46,7 @@ function  buildVehiclesDisplay($vehicles)
   $dv = '<ul id="inv-display">';
   foreach ($vehicles as $vehicle) {
     $dv .= '<li>';
-    $dv .= "<a href='/phpmotors/vehicles/?action=getvehicleinfo&vehicleId=" . urlencode($vehicle['invId']) . "'> <img src='/phpmotors$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
+    $dv .= "<a href='/phpmotors/vehicles/?action=getvehicleinfo&vehicleId=" . urlencode($vehicle['invId']) . "'> <img src='$vehicle[imgPath]' alt='$vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
     $dv .= '<hr>';
     $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2></a>";
     $dv .= "<span>$" . number_format($vehicle['invPrice']) . "</span>";
@@ -64,7 +64,7 @@ function buildVehicleDetail($vehicle)
 
   foreach ($vehicle as $info) {
     $dv .= '<div class="image_area">';
-    $dv .= "<img src='/phpmotors$info[invImage]' alt='Image of $info[invMake] $info[invModel] n phpmotors.com'>";
+    $dv .= "<img src='$info[imgPath]' alt='$info[invMake] $info[invModel] on phpmotors.com'>";
     $dv .= '</div><div class="text_area">';
     $dv .= "<h3>Price:   $" . number_format($info['invPrice']) . "</h3>";
     $dv .= '<hr>';
@@ -80,6 +80,15 @@ function buildVehicleDetail($vehicle)
   return $dv;
 }
 
+// Build the Thumbnails display view
+function buildThumbnailView($thumbnails) {
+  $dv = '<div class="thumbnails_area">';
+  foreach ($thumbnails as $image) {
+    $dv .= "<img src='$image[imgPath]' alt='$image[imgPath] on phpmotors.com'>";
+  }
+  $dv .= '</div>';
+  return $dv;
+}
 /* ************************************************************
 *           Functions for working with images
    ************************************************************ */

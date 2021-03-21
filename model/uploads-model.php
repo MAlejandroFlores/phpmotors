@@ -86,3 +86,31 @@ function checkExistingImage($imgName){
     $stmt->closeCursor();
     return $imageMatch;
    }
+
+function getVehicleThumbnailsPath($vehicleId) {
+    $db = phpmotorsConnect();
+    $sql = 'SELECT 
+	            imgPath 
+            FROM 
+                inventory 
+            INNER JOIN	
+	            images
+            ON 
+	            inventory.invId = images.invId
+            WHERE 
+                inventory.invId 
+            IN 
+                (SELECT inventory.invId FROM inventory WHERE inventory.invId = :invId)
+            AND
+	            imgPrimary = 0
+            AND 
+                imgName 
+            LIKE
+	            "%-tn.%"';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':invId', $vehicleId, PDO::PARAM_STR);
+    $stmt->execute();
+    $thumbnails = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $thumbnails;
+}
