@@ -75,7 +75,7 @@ function buildVehicleDetail($vehicle)
     $dv .= "<li> # in Stock: $info[invStock] </li>";
 
     $dv .= '</ul>';
-    $dv .= '</div></div>';
+    $dv .= '</div>';
   }
   return $dv;
 }
@@ -86,7 +86,7 @@ function buildThumbnailView($thumbnails) {
   foreach ($thumbnails as $image) {
     $dv .= "<img src='$image[imgPath]' alt='$image[imgPath] on phpmotors.com'>";
   }
-  $dv .= '</div>';
+  $dv .= '</div></div>';
   return $dv;
 }
 /* ************************************************************

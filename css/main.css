@@ -1,397 +1,405 @@
-@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=East+Sea+Dokdo&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-
-/*General content window*/
-
-html {
-    box-sizing: border-box;
-}
-
-*,
-*:before,
-*:after {
-    box-sizing: inherit;
-}
-
-body {
-    margin: 0px;
-}
-
-h1,
-h2,
-h3 {
-    font-family: 'Montserrat', sans-serif;
-    text-align: center;
-}
-
-h2 {
-    font-size: 150%;
-}
-
-p,
-li,
-table,
-button,
-a,
-label,
-input {
-    font-family: 'Architects Daughter', cursive;
-    font-size: 100%;
-}
-
-button {
-    background-color: #4c96d7;
-    padding: 3px 15px 3px;
-}
-
-
-/*Header*/
-
-header {
-    height: auto;
-}
-
-header a {
-    vertical-align: middle;
-}
-
-header .account a {
-    float: right;
-    padding-top: 0;
-    padding-right: 5%;
-    font-size: 1.2rem;
-    color: #8d8d8d;
-    text-decoration: none;
-}
-
-header .account {
-    float: right;
-    font-size: 150%;
-    padding-right: 20px;
-    padding-top: 5px;
-    color: #8d8d8d;
-    text-decoration: none;
-    display: block;
-}
-
-
-/*Navigation Bar*/
-
-.topnav {
-    position: relative;
-    height: 50px;
-}
-
-.topnav-centered {
-    float: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    text-align: center;
-    top: 50%;
-    left: 50%;
-}
-
-.topnav li {
-    display: inline;
-    width: 100%;
-    padding: 0;
-    height: 50px;
-    width: 150px;
-}
-
-nav {
-    background-color: #3a3a3a;
-    overflow: hidden;
-    display: flex;
-    justify-content: flex-start;
-}
-
-.topnav a {
-    float: none;
-    color: #ffffff;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 15px;
-    width: 30px;
-    top: 50%;
-    left: 50%;
-}
-
-li a:hover {
-    background-color: #4c96d7;
-    color: #000000;
-}
-
-
-/*Main section*/
-
-main {
-    padding-left: 1%;
-    padding-bottom: 25px;
-}
-
-.dmc_delorean {
-    padding-left: 2%;
-}
-
-.dmc_delorean p {
-    font-family: 'East Sea Dokdo', cursive;
-    color: #4c96d7;
-    margin: -5px;
-    padding-left: 3%;
-}
-
-.delorean_image img {
-    position: relative;
-    text-align: center;
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
-}
-
-.reviews {
-    padding-left: 3px;
-    margin-left: 20px;
-}
-
-.reviews ul {
-    padding-left: 3px;
-}
-
-ul.reviews_list {
-    list-style-type: circle;
-}
-
-table {
-    -webkit-border-horizontal-spacing: 10px;
-}
-
-td {
-    padding: 15px 10px;
-    text-align: center;
-}
-
-.cell_image {
-    background-color: #4c96d7;
-    border: 1px solid #000000;
-    font-size: 100%;
-}
-
-table td img {
-    background-color: #4c96d7;
-    width: 100%;
-}
-
-.own_button {
-    margin-top: 30px;
-    margin-left: 30px;
-}
-
-
-/* ---- NOTIFICATION MESSAGE ---- */
-
-.infoMessage {
-    color: rgb(189, 39, 39);
-    font-weight: 900;
-}
-
-
-/*Footer*/
-
-footer {
-    text-align: center;
-    position: relative;
-    max-width: 100%;
-    border-top: 5px solid #8d8d8d;
-    color: #3a3a3a;
-    font-family: 'East Sea Dokdo', cursive;
-    padding: 1%;
-}
-
-footer p {
-    margin: 0;
-    color: #3a3a3a;
-}
-
-
-/* Vehicle management*/
-
-.vehi-man,
-.add-vehi,
-.add-class,
-.registration_form,
-.login_form {
-    border: solid;
-    border-style: inset;
-    border-radius: 10px;
-    margin-top: 50px;
-    margin-left: 15%;
-    margin-bottom: 50px;
-    width: 65%;
-    padding: 10px;
-    padding-bottom: 40px;
-    padding-left: 40px;
-}
-
-.vehi-man h1,
-.add-vehi h1,
-.add-class h1,
-.registration_form h1,
-.login_form h1 {
-    text-align: center;
-}
-
-.vehi-man ul {
-    list-style-type: none;
-}
-
-
-/* ---- MANAGEMENT VEHICLE TABLE ---- */
-
-#inventoryDisplay td,
-td {
-    padding-top: 0px;
-    padding-bottom: 0px;
-    text-align: left;
-}
-
-
-/* ---- VEHICLE DISPLAY CLASSIFICATION  ----*/
-
-#inv-display {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-#info-display ul {
-    padding-left: 10px;
-}
-
-#inv-display li {
-    margin-bottom: .5em;
-    border: 1px #ccc solid;
-    list-style-type: none;
-    flex: 1 1 auto;
-}
-
-#inv-display li img {
-    max-width: 100%;
-}
-
-
-/* ---- VEHICLE DETAILED VIEW ---- */
-
-#info-display img {
-    width: 100%;
-    height: auto;
-}
-
-#info-display h1,
-h3 {
-    padding-left: 10px;
-}
-
-#info-display ul {
-    margin-right: 20px;
-}
-
-#info-display li {
-    list-style-type: none;
-    color: #808080;
-    text-align: justify;
-    padding: 10px;
-}
-
-#info-display img {
-    width: 100%;
-    height: auto;
-}
-
-#info-display li:nth-child(even) {
-    background-color: #f0ecec;
-}
-
-@media only screen and (min-width: 600px) {
-    body {
-        background-image: url('/phpmotors/images/site/small_check.jpg');
-        background-color: white;
-        padding-left: 12%;
-        padding-right: 12%;
-        padding-top: 2%;
-        padding-bottom: 2%;
-    }
-    .content {
-        background-color: #ffffff;
-        border: 4px solid #4c96d7;
-        border-radius: 8px;
-    }
-    /* ---- VEHICLE DETAILED VIEW ---- */
-}
-
-@media only screen and (min-width: 768px) {
-    /* ---- VEHICLE DISPLAY CLASSIFICATION ---- */
-    /* For vehicle display in classification view */
-    #inv-display {
-        flex-flow: row wrap;
-        justify-content: flex-start;
-    }
-    #inv-display h2 {
-        font-size: 1rem;
-    }
-    #inv-display li {
-        max-width: 200px;
-        flex: 1 0 auto;
-        text-align: center;
-        height: 250px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-    #inv-display div {
-        width: 100%;
-    }
-    /* ---- VEHICLE DETAILED VIEW ---- */
-    #info-display {
-        border: solid 1px #f0ecec;
-        border-radius: 10px;
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        margin: 20px;
-        text-align: center;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr;
-    }
-    #info-display .image_area {
-        grid-row: 1;
-        grid-column: 1;
-    }
-    #info-display .text_area {
-        grid-row: 1;
-        grid-column: 2;
-    }
-    #info-display img {
-        width: 100%;
-        height: auto;
-        margin-top: 60px;
-    }
-    #info-display ul {
-        padding: 0px;
-        margin-right: 0px;
-        margin-bottom: 0px;
-    }
-    #info-display li {
-        color: #808080;
-        padding: 10px;
-    }
-}
+        @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=East+Sea+Dokdo&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+        /*General content window*/
+        
+        html {
+            box-sizing: border-box;
+        }
+        
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+        
+        body {
+            margin: 0px;
+        }
+        
+        h1,
+        h2,
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 150%;
+        }
+        
+        p,
+        li,
+        table,
+        button,
+        a,
+        label,
+        input {
+            font-family: 'Architects Daughter', cursive;
+            font-size: 100%;
+        }
+        
+        button {
+            background-color: #4c96d7;
+            padding: 3px 15px 3px;
+        }
+        /*Header*/
+        
+        header {
+            height: auto;
+        }
+        
+        header a {
+            vertical-align: middle;
+        }
+        
+        header .account a {
+            float: right;
+            padding-top: 0;
+            padding-right: 5%;
+            font-size: 1.2rem;
+            color: #8d8d8d;
+            text-decoration: none;
+        }
+        
+        header .account {
+            float: right;
+            font-size: 150%;
+            padding-right: 20px;
+            padding-top: 5px;
+            color: #8d8d8d;
+            text-decoration: none;
+            display: block;
+        }
+        /*Navigation Bar*/
+        
+        .topnav {
+            position: relative;
+            height: 50px;
+        }
+        
+        .topnav-centered {
+            float: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+            top: 50%;
+            left: 50%;
+        }
+        
+        .topnav li {
+            display: inline;
+            width: 100%;
+            padding: 0;
+            height: 50px;
+            width: 150px;
+        }
+        
+        nav {
+            background-color: #3a3a3a;
+            overflow: hidden;
+            display: flex;
+            justify-content: flex-start;
+        }
+        
+        .topnav a {
+            float: none;
+            color: #ffffff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 15px;
+            width: 30px;
+            top: 50%;
+            left: 50%;
+        }
+        
+        li a:hover {
+            background-color: #4c96d7;
+            color: #000000;
+        }
+        /*Main section*/
+        
+        main {
+            padding-left: 1%;
+            padding-bottom: 25px;
+        }
+        
+        .dmc_delorean {
+            padding-left: 2%;
+        }
+        
+        .dmc_delorean p {
+            font-family: 'East Sea Dokdo', cursive;
+            color: #4c96d7;
+            margin: -5px;
+            padding-left: 3%;
+        }
+        
+        .delorean_image img {
+            position: relative;
+            text-align: center;
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+        }
+        
+        .reviews {
+            padding-left: 3px;
+            margin-left: 20px;
+        }
+        
+        .reviews ul {
+            padding-left: 3px;
+        }
+        
+        ul.reviews_list {
+            list-style-type: circle;
+        }
+        
+        table {
+            -webkit-border-horizontal-spacing: 10px;
+        }
+        
+        td {
+            padding: 15px 10px;
+            text-align: center;
+        }
+        
+        .cell_image {
+            background-color: #4c96d7;
+            border: 1px solid #000000;
+            font-size: 100%;
+        }
+        
+        table td img {
+            background-color: #4c96d7;
+            width: 100%;
+        }
+        
+        .own_button {
+            margin-top: 30px;
+            margin-left: 30px;
+        }
+        /* ---- NOTIFICATION MESSAGE ---- */
+        
+        .infoMessage {
+            color: rgb(189, 39, 39);
+            font-weight: 900;
+        }
+        /*Footer*/
+        
+        footer {
+            text-align: center;
+            position: relative;
+            max-width: 100%;
+            border-top: 5px solid #8d8d8d;
+            color: #3a3a3a;
+            font-family: 'East Sea Dokdo', cursive;
+            padding: 1%;
+        }
+        
+        footer p {
+            margin: 0;
+            color: #3a3a3a;
+        }
+        /* Vehicle management*/
+        
+        .vehi-man,
+        .add-vehi,
+        .add-class,
+        .registration_form,
+        .login_form {
+            border: solid;
+            border-style: inset;
+            border-radius: 10px;
+            margin-top: 50px;
+            margin-left: 15%;
+            margin-bottom: 50px;
+            width: 65%;
+            padding: 10px;
+            padding-bottom: 40px;
+            padding-left: 40px;
+        }
+        
+        .vehi-man h1,
+        .add-vehi h1,
+        .add-class h1,
+        .registration_form h1,
+        .login_form h1 {
+            text-align: center;
+        }
+        
+        .vehi-man ul {
+            list-style-type: none;
+        }
+        /* ---- MANAGEMENT VEHICLE TABLE ---- */
+        
+        #inventoryDisplay td,
+        td {
+            padding-top: 0px;
+            padding-bottom: 0px;
+            text-align: left;
+        }
+        /* ---- VEHICLE DISPLAY CLASSIFICATION  ----*/
+        
+        #inv-display {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #info-display ul {
+            padding-left: 10px;
+        }
+        
+        #inv-display li {
+            margin-bottom: .5em;
+            border: 1px #ccc solid;
+            list-style-type: none;
+            flex: 1 1 auto;
+        }
+        
+        #inv-display li img {
+            max-width: 100%;
+        }
+        /* ---- VEHICLE DETAILED VIEW ---- */
+        
+        #info-display img {
+            width: 100%;
+            height: auto;
+        }
+        
+        #info-display h1,
+        h3 {
+            padding-left: 10px;
+        }
+        
+        #info-display ul {
+            margin-right: 20px;
+        }
+        
+        #info-display li {
+            list-style-type: none;
+            color: #808080;
+            text-align: justify;
+            padding: 10px;
+        }
+        
+        #info-display img {
+            width: 100%;
+            height: auto;
+        }
+        
+        #info-display li:nth-child(even) {
+            background-color: #f0ecec;
+        }
+        
+        @media only screen and (min-width: 600px) {
+            body {
+                background-image: url('/phpmotors/images/site/small_check.jpg');
+                background-color: white;
+                padding-left: 12%;
+                padding-right: 12%;
+                padding-top: 2%;
+                padding-bottom: 2%;
+            }
+            .content {
+                background-color: #ffffff;
+                border: 4px solid #4c96d7;
+                border-radius: 8px;
+            }
+        }
+        /* ---- VEHICLE DETAILED VIEW ---- */
+        
+        @media only screen and (min-width: 768px) {
+            /* ---- HOME PAGE ---- */
+            .delorean_image img {
+                width: 90%;
+                height: auto;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            /* ---- VEHICLE DISPLAY CLASSIFICATION ---- */
+            /* For vehicle display in classification view */
+            #inv-display {
+                flex-flow: row wrap;
+                justify-content: flex-start;
+            }
+            #inv-display h2 {
+                font-size: 1rem;
+            }
+            #inv-display li {
+                max-width: 200px;
+                flex: 1 0 auto;
+                text-align: center;
+                height: 250px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            #inv-display div {
+                width: 100%;
+            }
+            /* ---- VEHICLE DETAILED VIEW ---- */
+            #info-display {
+                border: solid 1px #f0ecec;
+                border-radius: 10px;
+                box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                margin: 20px;
+                text-align: center;
+                display: grid;
+                grid-template-columns: 18% 80%;
+                grid-template-rows: 1fr 1fr;
+                column-gap: 20px;
+                padding: 30px;
+            }
+            #info-display .image_area {
+                grid-row: 1;
+                grid-column: 2;
+            }
+            #info-display .text_area {
+                grid-row: 2;
+                grid-column: 2;
+            }
+            #info-display img {
+                width: 100%;
+                height: auto;
+                max-width: 499px;
+                margin-top: 60px;
+            }
+            #info-display ul {
+                padding: 0px;
+                margin-right: 0px;
+                margin-bottom: 0px;
+            }
+            #info-display li {
+                color: #808080;
+                padding: 20px;
+            }
+            #info-display H3 {
+                color: #000000;
+                font-weight: bolder;
+                font-size: 1.2em;
+            }
+            /* ---- VEHICLE THUMBNAILS DETAILED VIEW ---- */
+            #info-display .thumbnails_area {
+                grid-row: 1/2;
+                grid-column: 1;
+                margin-top: 60px;
+            }
+            #info-display .thumbnails_area img {
+                margin: 3px;
+            }
+            #info-display .thumbnails_area img:hover {
+                transform: scale(2.0);
+            }
+        }

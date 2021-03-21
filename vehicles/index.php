@@ -208,12 +208,13 @@ switch ($action) {
     case 'getvehicleinfo':
         $vehicleId = filter_input(INPUT_GET, 'vehicleId', FILTER_SANITIZE_STRING);
         $vehicle = getVehicleById($vehicleId);
+        $thumbnails = getVehicleThumbnailsPath($vehicleId);
+
         if (!count($vehicle)) {
             $_SESSION['message'] = "<p class='notice'>Sorry, no vehicle details could be found.</p>";
         } else {
             $vehicleInfo = buildVehicleDetail($vehicle);
             $page_title = $vehicle[0]['invMake'] . ' ' . $vehicle[0]['invModel'] . ' Details';
-            $thumbnails = getVehicleThumbnailsPath($vehicleId);
             $thumbnailsView = buildThumbnailView($thumbnails);
         }
         
