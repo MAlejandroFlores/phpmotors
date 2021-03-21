@@ -30,11 +30,11 @@ if ($action == NULL) {
 *       Variables used for image Upload Functionality
    ***************************************************** */
 // directory name where uploaded images are stored
-$image_dir = '/phpmotors/uploads/images';
+$image_dir = '/phpmotors/images/vehicles';
 $image_dir_path = $_SERVER['DOCUMENT_ROOT'] . $image_dir;
 
 switch ($action) {
-    case 'uplaod':
+    case 'upload':
         // Store the incoming vehicle id and primary picture indicator
         $invId = filter_input(INPUT_POST, 'invId', FILTER_VALIDATE_INT);
         $imgPrimary = filter_input(INPUT_POST, 'imgPrimary', FILTER_VALIDATE_INT);
@@ -116,6 +116,7 @@ switch ($action) {
         $vehicles = getVehicles();
         // Build a selected list of vehicles information for view
         $prodSelect = buildVehiclesSelect($vehicles);
+        $page_title = 'Image Management';
         include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/image-admin.php';
         exit;
         break;
