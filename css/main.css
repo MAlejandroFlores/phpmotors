@@ -255,6 +255,7 @@
             padding: 0;
             display: flex;
             flex-direction: column;
+            text-align: center;
         }
         
         #info-display ul {
@@ -274,7 +275,7 @@
         /* ---- VEHICLE DETAILED VIEW ---- */
         
         #info-display img {
-            width: 100%;
+            width: 95%;
             height: auto;
         }
         
@@ -295,12 +296,45 @@
         }
         
         #info-display img {
-            width: 100%;
+            width: 95%;
             height: auto;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         #info-display li:nth-child(even) {
             background-color: #f0ecec;
+        }
+        
+        #info-display {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+        
+        #info-display .image_area {
+            grid-row: 1;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        
+        #info-display .thumbnails_area {
+            grid-row: 2;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        
+        #info-display .text_area {
+            grid-row: 3;
+        }
+        /* ---- THUMBNAILS IMAGES ---- */
+        
+        #info-display .thumbnails_area img {
+            max-width: 150px;
+            max-width: 150px;
+            vertical-align: middle;
+            margin: 3px;
         }
         
         @media only screen and (min-width: 600px) {
