@@ -59,29 +59,29 @@ function  buildVehiclesDisplay($vehicles)
 // Build the Vehicle display view
 function buildVehicleDetail($vehicle)
 {
-  $dv = "<h1>" . $vehicle[0]['invMake'] . ' ' . $vehicle[0]['invModel'] . " Details </h1>";
+  $dv = "<h1>" . $vehicle['invMake'] . ' ' . $vehicle['invModel'] . " Details </h1>";
   $dv .= '<div id="info-display">';
 
-  foreach ($vehicle as $info) {
-    $dv .= '<div class="image_area">';
-    $dv .= "<img src='$info[imgPath]' alt='$info[invMake] $info[invModel] on phpmotors.com'>";
-    $dv .= '</div><div class="text_area">';
-    $dv .= "<h3>Price:   $" . number_format($info['invPrice']) . "</h3>";
-    $dv .= '<hr>';
-    $dv .= '<ul>';
-    $dv .= "<li><h3>$info[invMake] $info[invModel] Details</h3></li>";
-    $dv .= "<li> $info[invDescription] </li>";
-    $dv .= "<li> Color: $info[invColor] </li>";
-    $dv .= "<li> # in Stock: $info[invStock] </li>";
+  $dv .= '<div class="image_area">';
+  $dv .= "<img src='$vehicle[imgPath]' alt='$vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
+  $dv .= '</div><div class="text_area">';
+  $dv .= "<h3>Price:   $" . number_format($vehicle['invPrice']) . "</h3>";
+  $dv .= '<hr>';
+  $dv .= '<ul>';
+  $dv .= "<li><h3>$vehicle[invMake] $vehicle[invModel] Details</h3></li>";
+  $dv .= "<li> $vehicle[invDescription] </li>";
+  $dv .= "<li> Color: $vehicle[invColor] </li>";
+  $dv .= "<li> # in Stock: $vehicle[invStock] </li>";
 
-    $dv .= '</ul>';
-    $dv .= '</div>';
-  }
+  $dv .= '</ul>';
+  $dv .= '</div>';
+
   return $dv;
 }
 
 // Build the Thumbnails display view
-function buildThumbnailView($thumbnails) {
+function buildThumbnailView($thumbnails)
+{
   $dv = '<div class="thumbnails_area">';
   foreach ($thumbnails as $image) {
     $dv .= "<img src='$image[imgPath]' alt='$image[imgPath] on phpmotors.com'>";
@@ -251,3 +251,16 @@ function resizeImage($old_image_path, $new_image_path, $max_width, $max_height)
   // Free any memory associated with the old image
   imagedestroy($old_image);
 } // ends resizeImage function
+
+/* ************************************************************
+*           Functions for Reviews
+   ************************************************************ */
+
+// Build Manage reviews view
+function buildReviewList()
+{
+}
+
+function  buildCustomerVehicleReviews($vehicle)
+{
+}

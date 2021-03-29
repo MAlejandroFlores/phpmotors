@@ -15,7 +15,12 @@ require_once '../library/functions.php';
 // Get the array of classifications from DB using model
 $classifications = getClassifications();
 
+// Build Navigation Menu
 $navList = buildNavList($classifications);
+
+// Build Review Management View
+$manageReviews = '<h2>Manage Your Product Reviews</h2>';
+
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
@@ -224,6 +229,7 @@ switch ($action) {
         //exit;
         if (isset($_SESSION['loggedin'])) {
             $page_title = 'Account';
+            
             include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/admin.php';
         } else {
             header('Location: /phpmotors/index.php');

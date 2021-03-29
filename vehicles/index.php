@@ -17,10 +17,10 @@ require_once '../model/uploads-model.php';
 // Get the array of classifications from DB using model
 $classifications = getClassifications();
 
+// Build Navigation Menu
 $navList = buildNavList($classifications);
 
-//echo '<pre>' . print_r($classifications, true) . '</pre>';
-//exit;
+
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL) {
@@ -214,7 +214,8 @@ switch ($action) {
             $_SESSION['message'] = "<p class='notice'>Sorry, no vehicle details could be found.</p>";
         } else {
             $vehicleInfo = buildVehicleDetail($vehicle);
-            $page_title = $vehicle[0]['invMake'] . ' ' . $vehicle[0]['invModel'] . ' Details';
+            $customerReviews = buildCustomerVehicleReviews($vehicle);
+            $page_title = $vehicle['invMake'] . ' ' . $vehicle['invModel'] . ' Details';
             $thumbnailsView = buildThumbnailView($thumbnails);
         }
         

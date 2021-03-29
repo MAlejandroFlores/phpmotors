@@ -17,6 +17,8 @@ require_once '../library/functions.php';
 require_once '../model/uploads-model.php';
 // Get the accounts model for use a needed
 require_once '../model/accounts-model.php';
+// Get the review\s model for use a needed
+require_once '../model/reviews-model.php';
 
 // Get the array of classifications from DB using model
 $classifications = getClassifications();
@@ -31,11 +33,40 @@ if ($action == NULL) {
 switch ($action) {
     case 'addReview':
 
-        // Store message to session
-        $_SESSION['message'] = $message;
+        $reviewText	 = filter_input(INPUT_POST, 'reviewText', FILTER_SANITIZE_STRING);
+        $reviewDate = filter_input(INPUT_POST, 'reviewDate', FILTER_SANITIZE_STRING);
+        $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
+        $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
+        
+        if (empty($reviewText)){
+            $_SESSION['message'] = '<p> Please provide a Review.</p>';
+        
+            // include($_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-detail.php');
+            
+            include ($_SERVER['DOCUMENT_ROOT'] . '/phpmotors/vehicles/index.php?action=getvehicleinfo&vehicleId=' . $invId);
+            exit;
+        } else {
+            //$reviewDate = time();
+            $addReviewOutcome = addReview($reviewText, $invId, $clientId);
+            
+            if ($addReviewOutcome === 1) {
+                $_SESSION['message'] = "<p>Thanks for the review, it is displayed below.</p>";
+                // include($_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-detail.php');
+                include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/vehicles/?action=getvehicleinfo&vehicleId=' . $invId;
+                exit;
+            } else {
+                $_SESSION['message'] = "<p>Sorry, but the couldn't add the review. Please try again.</p>";
+                // include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-detail.php';
+                include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/vehicles/?action=getvehicleinfo&vehicleId=' . $invId;
+                exit;
+            }
+            
+        }
+
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/vehicles/?action=getvehicleinfo&vehicleId=' . $invId;
 
         // Redirect to this controller for default action
-        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/image-admin.php';
+        // include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/vehicles.php';
         break;
 
     case 'displayReview':

@@ -202,8 +202,13 @@ function getVehicleById($vehicleId)
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':invId', $vehicleId, PDO::PARAM_STR);
     $stmt->execute();
-    $vehicle = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $vehicles = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
+    foreach ($vehicles as $ind_vehicle) {
+        foreach ($ind_vehicle as $key => $value) {
+            $vehicle[$key] = $value;
+        }
+    }
     return $vehicle;
 }
 

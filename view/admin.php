@@ -36,10 +36,20 @@ if (isset($_SESSION['loggedin'])) {
       echo '<p>Use this link to manage the inventory.</p>';
       echo '<a href="/phpmotors/vehicles/?action=default">Vehicle Management</a><br><br>';
    }
+
+   //Manage Vehicle reviews
+   if (isset($manageReviews)) {
+      echo $manageReviews;
+   }
 } else {
    header('Location: /phpmotors/index.php');
 }
 ?>
+
+<?php
+
+?>
+
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/footer.php'; ?>
 <?php unset($_SESSION['message']); ?>
