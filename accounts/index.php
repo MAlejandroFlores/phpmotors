@@ -11,6 +11,10 @@ require_once '../model/main-model.php';
 require_once '../model/accounts-model.php';
 // Get the functions library
 require_once '../library/functions.php';
+// Get the review\s model for use a needed
+require_once '../model/reviews-model.php';
+// Get the vehicle model for use a needed
+require_once '../model/vehicles-model.php';
 
 // Get the array of classifications from DB using model
 $classifications = getClassifications();
@@ -19,7 +23,7 @@ $classifications = getClassifications();
 $navList = buildNavList($classifications);
 
 // Build Review Management View
-$manageReviews = '<h2>Manage Your Product Reviews</h2>';
+$manageReviews = '';
 
 
 $action = filter_input(INPUT_POST, 'action');
@@ -116,6 +120,7 @@ switch ($action) {
         // Send them to the admin view
         //include '../view/admin.php';
         $page_title = 'Account';
+        $customer_reviews = builCustomerReviews($_SESSION['clientData']['clientId']);
         include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/admin.php';
         exit;
 
@@ -229,7 +234,7 @@ switch ($action) {
         //exit;
         if (isset($_SESSION['loggedin'])) {
             $page_title = 'Account';
-            
+            $customer_reviews = builCustomerReviews($_SESSION['clientData']['clientId']);
             include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/admin.php';
         } else {
             header('Location: /phpmotors/index.php');

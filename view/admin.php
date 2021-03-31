@@ -30,25 +30,27 @@ if (isset($_SESSION['loggedin'])) {
    <a href="/phpmotors/accounts/?action=mod_user">Update Account Information</a><br><br>
 
 
-<?php
+   <?php
    if ($_SESSION['clientData']['clientLevel'] > '1') {
       echo '<h2>Inventory Management</h2>';
       echo '<p>Use this link to manage the inventory.</p>';
       echo '<a href="/phpmotors/vehicles/?action=default">Vehicle Management</a><br><br>';
    }
-
+   ?>
+   <h2>Manage Your Product Reviews</h2>
+<?php
    //Manage Vehicle reviews
-   if (isset($manageReviews)) {
-      echo $manageReviews;
+   if (isset($customer_reviews)) {
+      echo $customer_reviews;
+   } else {
+      echo "<p>You don't have reviews so far.</p>";
    }
 } else {
    header('Location: /phpmotors/index.php');
 }
-?>
-
-<?php
 
 ?>
+
 
 
 <?php include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/snippets/footer.php'; ?>

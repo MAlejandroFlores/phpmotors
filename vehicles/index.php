@@ -13,6 +13,10 @@ require_once '../model/vehicles-model.php';
 require_once '../library/functions.php';
 // Get the uploads model
 require_once '../model/uploads-model.php';
+// Get the review\s model for use a needed
+require_once '../model/reviews-model.php';
+// Get the accounts model for use a needed
+require_once '../model/accounts-model.php';
 
 // Get the array of classifications from DB using model
 $classifications = getClassifications();
@@ -77,7 +81,7 @@ switch ($action) {
             empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage)
             || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor) || empty($classificationId)
         ) {
-            $_SESSION['message'] = '<p> Please provide information for all empty form fields.</p>';
+            $_SESSION['message'] = 'Please provide information for all empty form fields.';
             include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/add-vehicle.php';
             exit;
         }
@@ -85,11 +89,11 @@ switch ($action) {
         $regOutcome = addVehicle($invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId);
 
         if ($regOutcome === 1) {
-            $_SESSION['message'] = "<p>The $invMake $invModel was added successfully!</p>";
-            include($_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/add-vehicle.php');
+            $_SESSION['message'] = "The $invMake $invModel was added successfully!";
+            include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/add-vehicle.php';
             exit;
         } else {
-            $_SESSION['message'] = "<p>Sorry, but adding the $invMake $invModel failed. Please try again.</p>";
+            $_SESSION['message'] = "Sorry, but adding the $invMake $invModel failed. Please try again.";
             include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/add-classification.php';
             exit;
         }
@@ -214,7 +218,7 @@ switch ($action) {
             $_SESSION['message'] = "<p class='notice'>Sorry, no vehicle details could be found.</p>";
         } else {
             $vehicleInfo = buildVehicleDetail($vehicle);
-            $customerReviews = buildCustomerVehicleReviews($vehicle);
+            $customerReviews = buildVehicleReviews($vehicleId);
             $page_title = $vehicle['invMake'] . ' ' . $vehicle['invModel'] . ' Details';
             $thumbnailsView = buildThumbnailView($thumbnails);
         }

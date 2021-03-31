@@ -257,10 +257,66 @@ function resizeImage($old_image_path, $new_image_path, $max_width, $max_height)
    ************************************************************ */
 
 // Build Manage reviews view
-function buildReviewList()
+function getReviewDate($review)
 {
+  $reviewDate = date('d F, Y',strtotime($review['reviewDate']) );
+  return $reviewDate;
 }
 
-function  buildCustomerVehicleReviews($vehicle)
+// Get customer name based on client Id
+function getCustomerUsername($clientId)
 {
+  $user = getClientByID($clientId);
+  $username = substr(ucfirst($user['clientFirstname']), 0, 1) . ucfirst($user['clientLastname']);
+  return $username;
+}
+
+// Get VehicleName based on review
+function getVehicleNameByReview($review) {
+  $vehicle = getVehicleById($review['invId']);
+  $vehiclename = $vehicle['invMake'] . ' ' . $vehicle['invModel'];
+  return $vehiclename;
+}
+
+// Build Vehicle Review
+function  buildVehicleReviews($vehicleId)
+{
+  $reviews = getVehicleReviews($vehicleId);
+  $div = '<div class="reviews">';
+  if (empty($reviews) && isset($_SESSION['loggedin'])) {
+    $div .= '<p>Be the first to write a review.</p>';
+    // print_r($reviews);
+    // exit;
+  } else {
+    foreach ($reviews as $review) {
+      $username = getCustomerUsername($review['clientId']);
+      $reviewDate = getReviewDate($review);
+      $div .= '<div class="customer_review">';
+      $div .= '<label>' . $username .  ' wrote on ' . $reviewDate . ' : </label>';
+      $div .= '<p>' . $review['reviewText'] . '</p>';
+      $div .= '</div>';
+    }
+  }
+  $div .= '</div>';
+  return $div;
+}
+
+// Build  Customers' Reviews
+function builCustomerReviews($clientId) {
+  $reviews = getCustomerReviews($clientId);
+  // print_r($reviews);
+  // exit;
+  $div = '<div class="customer_reviews">';
+  $div .= '<ul>';
+  foreach ($reviews as $review) {
+    // $vehicle = getInvItemInfo($review['invId']);
+    // $vehiclename = $vehicle['invMake'] . ' ' . $vehicle['invModel'];
+    $vehiclename = getVehicleNameByReview($review);
+    $reviewDate = getReviewDate($review);
+    // $reviewDate = date('d F, Y',strtotime($review['reviewDate']) );
+    $div .= '<li>' . $vehiclename . ' (Reviewed on '. $reviewDate . "): <a href='/phpmotors/reviews/?action=mod&reviewId=";
+    $div .= $review['reviewId'] . "'>Edit</a> | <a href='/phpmotors/reviews/?action=del&reviewId=" . $review['reviewId'] . "'>Delete</a>" .'</li>';
+  }
+  $div .= '</ul></div>';
+  return $div;
 }

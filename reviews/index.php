@@ -33,73 +33,97 @@ if ($action == NULL) {
 switch ($action) {
     case 'addReview':
 
-        $reviewText	 = filter_input(INPUT_POST, 'reviewText', FILTER_SANITIZE_STRING);
+        $reviewText     = filter_input(INPUT_POST, 'reviewText', FILTER_SANITIZE_STRING);
         $reviewDate = filter_input(INPUT_POST, 'reviewDate', FILTER_SANITIZE_STRING);
         $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
         $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
-        
-        if (empty($reviewText)){
-            $_SESSION['message'] = '<p> Please provide a Review.</p>';
-        
-            // include($_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-detail.php');
-            
-            include ($_SERVER['DOCUMENT_ROOT'] . '/phpmotors/vehicles/index.php?action=getvehicleinfo&vehicleId=' . $invId);
-            exit;
+
+        if (empty($reviewText)) {
+            $_SESSION['message'] = 'Please provide a Review.!';
         } else {
             //$reviewDate = time();
             $addReviewOutcome = addReview($reviewText, $invId, $clientId);
-            
+
             if ($addReviewOutcome === 1) {
-                $_SESSION['message'] = "<p>Thanks for the review, it is displayed below.</p>";
-                // include($_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-detail.php');
-                include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/vehicles/?action=getvehicleinfo&vehicleId=' . $invId;
-                exit;
+                $_SESSION['message'] = "Thanks for the review, it is displayed below.";
             } else {
-                $_SESSION['message'] = "<p>Sorry, but the couldn't add the review. Please try again.</p>";
-                // include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/vehicle-detail.php';
-                include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/vehicles/?action=getvehicleinfo&vehicleId=' . $invId;
-                exit;
+                $_SESSION['message'] = "Sorry, but the couldn't add the review. Please try again.";
             }
-            
         }
 
-        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/vehicles/?action=getvehicleinfo&vehicleId=' . $invId;
-
-        // Redirect to this controller for default action
-        // include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/vehicles.php';
+        header('Location: /phpmotors/vehicles/?action=getvehicleinfo&vehicleId=' . $invId . '#customer_reviews');
+        exit;
         break;
 
-    case 'displayReview':
-
-        // Store message to session
-        $_SESSION['message'] = $message;
-
-        // Redirect to this controller for default action
-        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/image-admin.php';
+    case 'mod':
+        $reviewId = filter_input(INPUT_GET, 'reviewId', FILTER_VALIDATE_INT);
+        $review = getReviewInfo($reviewId);
+        // Validate for an existing review
+        if (empty($review)) {
+            $_SESSION['message'] = 'Error: Review could not be found';
+            header('location: /phpmotors/accounts/');
+            exit;
+        } else {
+            $reviewDate = getReviewDate($review);
+            $vehicleName = getVehicleNameByReview($review);
+            $reviewText = $review['reviewText'];
+        }
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/review-update.php';
+        exit;
         break;
     case 'updateReview':
-
-        // Store message to session
-        $_SESSION['message'] = $message;
-
+        $reviewId = filter_input(INPUT_POST, 'reviewId', FILTER_SANITIZE_NUMBER_INT);
+        $reviewText = filter_input(INPUT_POST, 'reviewText', FILTER_SANITIZE_STRING);
+        if (empty($reviewText) ||  empty($reviewId)) {
+            $_SESSION['message'] = 'Review not edited. Please enter a review';
+        } else {
+            $updateResult = updateReview($reviewId, $reviewText);
+            // Store message to session
+            if ($updateResult === 1) {
+                $_SESSION['message'] = 'The review was updated successfully.';
+            }
+        }
         // Redirect to this controller for default action
-        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/image-admin.php';
+        header('location: /phpmotors/accounts/');
+        exit;
         break;
-    case 'confirmDeletion':
-
-        // Store message to session
-        $_SESSION['message'] = $message;
-
-        // Redirect to this controller for default action
-        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/image-admin.php';
+    case 'del':
+        $reviewId = filter_input(INPUT_GET, 'reviewId', FILTER_VALIDATE_INT);
+        $review = getReviewInfo($reviewId);
+        // Validate for an existing review
+        if (empty($review)) {
+            $_SESSION['message'] = 'Error: Review could not be found';
+            header('location: /phpmotors/accounts/');
+            exit;
+        } else {
+            $reviewDate = getReviewDate($review);
+            $vehicleName = getVehicleNameByReview($review);
+            $reviewText = $review['reviewText'];
+        }
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/review-delete.php';
+        exit;
         break;
-    case 'deletReview':
+    case 'deleteReview':
+        //Filter and store variables
+        $reviewId = filter_input(INPUT_POST, 'reviewId', FILTER_SANITIZE_NUMBER_INT);
+
+        $deleteResult = deleteReview($reviewId);
+
+        if ($deleteResult === 1) {
+            $_SESSION['message'] = "The review was deleted successfully";
+            
+        } else {
+            $_SESSION['message'] = "Error, but couldn't delete the review.";
+        }
+        header('location: /phpmotors/accounts/');
+        exit;
+        break;
 
         // Store message to session
         $_SESSION['message'] = $message;
 
         // Redirect to this controller for default action
-        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/image-admin.php';
+        include $_SERVER['DOCUMENT_ROOT'] . '/phpmotors/view/admin.php';
         break;
     case 'delete':
 
