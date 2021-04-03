@@ -75,7 +75,9 @@ switch ($action) {
         $reviewId = filter_input(INPUT_POST, 'reviewId', FILTER_SANITIZE_NUMBER_INT);
         $reviewText = filter_input(INPUT_POST, 'reviewText', FILTER_SANITIZE_STRING);
         if (empty($reviewText) ||  empty($reviewId)) {
-            $_SESSION['message'] = 'Review not edited. Please enter a review';
+            $_SESSION['message'] = 'Error: Review not edited. Please enter a review';
+            header('Location: /phpmotors/reviews/?action=mod&reviewId='.$reviewId);
+            exit;
         } else {
             $updateResult = updateReview($reviewId, $reviewText);
             // Store message to session
